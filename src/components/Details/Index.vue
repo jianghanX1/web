@@ -89,9 +89,8 @@
 <script>
 import Bottom from '@/components/HomeIndex/Bottom';
 import { getGameList, determinePcOrMove, shuffle, getGameType } from '@/utils/utils.js'
-import request from '@/utils/request.js'
 export default {
-  name: "Index",
+  name: "detailsIndex",
   components: {
     Bottom
   },
@@ -202,7 +201,7 @@ export default {
       getGameType().then((res)=>{
         const { data } = res || {}
         const { code, data:dataObj } = data || {}
-        const { game_type, game_grade } = dataObj || {}
+        const { game_type } = dataObj || {}
         if (code == 1) {
           let arr = game_type && game_type.splice(0,3) || []
           if (gameType) {

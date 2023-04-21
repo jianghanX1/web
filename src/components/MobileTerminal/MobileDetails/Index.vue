@@ -59,7 +59,7 @@ import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
 import { getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType } from "@/utils/utils";
 export default {
-  name: "Index",
+  name: "mobileDetailsIndex",
   components: {
     ClassList,StartAndEnd
   },
@@ -123,7 +123,7 @@ export default {
       getGameType().then((res)=>{
         const { data } = res || {}
         const { code, data:dataObj } = data || {}
-        const { game_type, game_grade } = dataObj || {}
+        const { game_type } = dataObj || {}
         if (code == 1) {
           this.typeList = game_type
           game_type.map((item)=>{

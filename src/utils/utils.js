@@ -20,7 +20,7 @@ export function getGameInfo (gameId) {
   })
 }
 // 获取游戏类型
-export function getGameType (gameType) {
+export function getGameType () {
   return  request({
     url: '/api/pmm/system/dict',
     method: 'get',

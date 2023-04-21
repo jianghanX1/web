@@ -40,7 +40,7 @@
     <br/>
     <div>PRIVACY POLICY</div>
     <br/>
-    <p>Copyright © 2021 ah5game.com. All rights reserved.</p>
+    <p>Copyright ah5game.com. All rights reserved.</p>
     <BottomNav></BottomNav>
   </div>
 </template>
@@ -48,7 +48,7 @@
 <script>
 import BottomNav from '@/components/BottomNav';
 export default {
-  name: "Privacy",
+  name: "privacyIndex",
   components: {
     BottomNav
   },

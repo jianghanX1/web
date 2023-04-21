@@ -12,7 +12,7 @@
 <script>
 import { getGameList } from '@/utils/utils.js'
 export default {
-  name: "Content",
+  name: "contentIndex",
   data() {
     return {
       gameList: [], // 游戏列表

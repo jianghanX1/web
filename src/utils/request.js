@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { Message, MessageBox, Loading } from 'element-ui'
-import router from "../router";  //导入element-ui组件库
+import { Message, Loading } from 'element-ui'
 
 // 创建axios的对象
 const instance = axios.create({
@@ -70,9 +69,6 @@ instance.interceptors.response.use(response => {
     // 1.公共错误处理
     // 2.根据响应码具体处理
     switch (error.response.status) {
-      case 400:
-        error.message = '错误请求'
-        break;
       case 400:
         error.message = '错误请求'
         break;

@@ -24,7 +24,7 @@
 <script>
 import { getGameType } from "@/utils/utils";
 export default {
-  name: 'Banner',
+  name: 'navigationIndex',
   data () {
     return {
       searchInput: null,
@@ -48,7 +48,7 @@ export default {
       getGameType().then((res)=>{
         const { data } = res || {}
         const { code, data:dataObj } = data || {}
-        const { game_type, game_grade } = dataObj || {}
+        const { game_type } = dataObj || {}
         if (code == 1) {
           this.gameTypeList = game_type
         } else {
@@ -80,7 +80,7 @@ export default {
 @media screen and (max-width: 1650px){
   .bj_left{
     .title{
-      .el-icon-menu{
+      /deep/ .el-icon-menu{
         display: inline-block!important;
       }
     }

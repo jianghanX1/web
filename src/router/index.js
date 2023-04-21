@@ -1,27 +1,71 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import App from '@/App';
+import HomeIndex from '@/components/HomeIndex/Index'; // 首页
+import GameType from '@/components/GameType/Index';
+import Details from '@/components/Details/Index'; // 详情页
+import MobileIndex from '@/components/MobileTerminal/MobileIndex'; // 移动端首页
+import MobileClassify from '@/components/MobileTerminal/MobileHome/MobileClassify/Index'; // 移动端分类
+import MobileDetails from '@/components/MobileTerminal/MobileDetails/Index'; // 移动端详情
+import Privacy from '@/views/Privacy';
+import ContactUs from '@/views/ContactUs';
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'App',
+    component: App,
+    redirect: '/P/homeIndex'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/P/homeIndex',
+    name: 'HomeIndex',
+    component: HomeIndex,
+  },{
+    path: '/P/gameType',
+    name: 'GameType',
+    component: GameType,
+  },{
+    path: '/P/details',
+    name: 'Details',
+    component: Details
+  },{
+    path: '/M/homeIndex',
+    name: 'MobileIndex',
+    component: MobileIndex
+  },{
+    path: '/M/gameType',
+    name: 'MobileClassify',
+    component: MobileClassify
+  },{
+    path: '/M/details',
+    name: 'mobileDetails',
+    component: MobileDetails
+  },
+  {
+    path: '/privacy',
+    name: 'privacy',
+    component: Privacy
+  },
+  {
+    path: '/contactUs',
+    name: 'contactUs',
+    component: ContactUs
+  },
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  // }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

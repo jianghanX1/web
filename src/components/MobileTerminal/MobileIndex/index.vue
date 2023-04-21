@@ -21,7 +21,7 @@ import img2 from '@/assets/gameType02.jpg'
 
 import { getGameList, determinePcOrMove, getGameType } from '@/utils/utils.js'
 export default {
-  name: "index",
+  name: "mobileIndex",
   data() {
     return {
       topGameList: [], // 移动端头部游戏列表
@@ -62,7 +62,7 @@ export default {
     getGameType().then((res)=>{
       const { data } = res || {}
       const { code, data:dataObj } = data || {}
-      const { game_type, game_grade } = dataObj || {}
+      const { game_type } = dataObj || {}
       if (code == 1) {
         game_type && game_type.map((item,index)=>{
             if (index % 2 == 0) {

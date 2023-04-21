@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: "Bottom",
+  name: "bottomIndex",
   props: ["titleType"],
   data() {
     return {
