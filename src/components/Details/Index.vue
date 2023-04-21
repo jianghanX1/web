@@ -22,7 +22,7 @@
           <div class="game-bar">
             <div class="bar-app-icon"><img :src="gameInfo.iconUrl" alt=""></div>
             <div class="bar-btns">
-<!--              <div class="download"><span @click="addToDesktop">Add to Desktop</span></div>-->
+              <div class="download" v-if="$store.state.deferredPromptType"><span class="add-button" @click="addToDesktop">Add to Desktop</span></div>
               <div class="play-tag" @click="getGameType1(gameInfo.gameType)"><span>Play {{ gameInfo.gameType }} Games</span></div>
               <div class="full-btn" @click="amplifyClick"><i class="el-icon-rank"></i></div>
             </div>
@@ -125,7 +125,6 @@ export default {
       leftBtnType: true, // 侧按钮
       topBtnType: false, // 顶部按钮
       bottomBtnType: true, // 底部按钮
-      deferredPrompt: null
     }
   },
   created() {
@@ -141,38 +140,6 @@ export default {
     }
   },
   mounted() {
-//     console.log(111111);
-// // 监听beforeinstallprompt事件，该事件在网站满足PWA安装条件时触发，保存安装事件
-//     window.addEventListener("beforeinstallprompt", e => {
-//       e.preventDefault();
-//       console.log(e);
-//       this.deferredPrompt = e;
-//     });
-//
-// // 监听appinstalled事件，该事件在用户同意安装后触发，清空安装事件
-//     window.addEventListener("appinstalled", () => {
-//       this.deferredPrompt = null;
-//     });
-//
-//     var myDynamicManifest = {
-//       "name": "Your Great Site",
-//       "short_name": "Site",
-//       "description": "Something dynamic",
-//       "start_url": "<your-url>",
-//       "background_color": "#000000",
-//       "theme_color": "#0f4a73",
-//       "icons": [{
-//         "src": "whatever.png",
-//         "sizes": "256x256",
-//         "type": "image/png"
-//       }]
-//     }
-//     const stringManifest = JSON.stringify(myDynamicManifest);
-//     const blob = new Blob([stringManifest], {type: 'application/json'});
-//     const manifestURL = URL.createObjectURL(blob);
-//     console.log(blob);
-//     console.log(manifestURL);
-
     let headdiv=document.getElementById("girlsGames");
     let nTop = headdiv.offsetTop;
     window.onscroll = function () {
@@ -189,11 +156,13 @@ export default {
       }
     }
     this.getGameType1()
+
   },
   methods: {
 
     addToDesktop() {
-      console.log(this.deferredPrompt);
+      this.$store.state.deferredPrompt.prompt();
+      this.$store.commit("changePWA",{deferredPrompt: null,deferredPromptType: this.$store.state.deferredPromptType})
     },
 
     // 获取游戏类型
@@ -276,12 +245,42 @@ export default {
           this.six = newArr.splice(0,30)
           this.intercept = newArr
           this.gameList = shuffleArr
+
+          // this.manifestIcon(gameInfo)
         } else {
           this.$message.error('数据加载失败')
         }
       }).catch((err)=>{
         console.log(err);
       })
+    },
+    // 动态加载PWA图标
+    manifestIcon(gameInfo) {
+      let myDynamicManifest = {
+        "short_name": "阿凡太",
+        "name": "阿凡太",
+        "start_url": "index.html",
+        "display": "standalone",
+        "background_color": "#080403",
+        "theme_color": "#080403",
+        "icons": [
+          {
+            "src": `${gameInfo.iconUrl}`,
+            "sizes": "192x192",
+            "type": "image/png"
+          },
+          {
+            "src": `${gameInfo.iconUrl}`,
+            "sizes": "256x256",
+            "type": "image/png"
+          }
+        ]
+      }
+      const stringManifest = JSON.stringify(myDynamicManifest);
+      const blob = new Blob([stringManifest], {type: 'application/json'});
+      const manifestURL = URL.createObjectURL(blob);
+      document.querySelector('#manifest').setAttribute('href', manifestURL)
+      console.log(document.querySelector('#manifest'));
     },
     // 点击加载更多
     loadMoreGames () {
