@@ -12,6 +12,7 @@ Vue.config.productionTip = false
 window.addEventListener('beforeinstallprompt', (e) => {
   // 防止 Chrome 67 及更早版本自动显示安装提示
   e.preventDefault();
+  console.log(e);
   // 稍后再触发此事件
   store.commit("changePWA",{deferredPrompt: e,deferredPromptType: true})
   setTimeout(()=>{

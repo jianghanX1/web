@@ -161,7 +161,8 @@ export default {
   methods: {
 
     addToDesktop() {
-      this.$store.state.deferredPrompt.prompt();
+      console.log(this.$store.state.deferredPrompt);
+      this.$store.state.deferredPrompt && this.$store.state.deferredPrompt.prompt();
       this.$store.commit("changePWA",{deferredPrompt: null,deferredPromptType: this.$store.state.deferredPromptType})
     },
 
@@ -246,7 +247,7 @@ export default {
           this.intercept = newArr
           this.gameList = shuffleArr
 
-          // this.manifestIcon(gameInfo)
+          this.manifestIcon(gameInfo)
         } else {
           this.$message.error('数据加载失败')
         }
@@ -259,9 +260,9 @@ export default {
       let myDynamicManifest = {
         "short_name": "阿凡太",
         "name": "阿凡太",
-        "start_url": "index.html",
+        "start_url": `${window.location.href}`,
         "display": "standalone",
-        "background_color": "#080403",
+        "background_color": "#0054ff",
         "theme_color": "#080403",
         "icons": [
           {
@@ -273,14 +274,18 @@ export default {
             "src": `${gameInfo.iconUrl}`,
             "sizes": "256x256",
             "type": "image/png"
-          }
+          },
+          {
+            "src": `${gameInfo.iconUrl}`,
+            "sizes": "512x512",
+            "type": "image/png"
+          },
         ]
       }
       const stringManifest = JSON.stringify(myDynamicManifest);
       const blob = new Blob([stringManifest], {type: 'application/json'});
       const manifestURL = URL.createObjectURL(blob);
       document.querySelector('#manifest').setAttribute('href', manifestURL)
-      console.log(document.querySelector('#manifest'));
     },
     // 点击加载更多
     loadMoreGames () {
