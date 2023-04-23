@@ -3,18 +3,18 @@
   "name": "阿凡太",
   "icons": [
     {
-      "src": "./img/icons/icon-512.png",
+      "src": "./favicon.ico",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./img/icons/icon-512.png",
+      "src": "./favicon.ico",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#080403",
+  "background_color": "#0054ff",
   "theme_color": "#080403"
 }
