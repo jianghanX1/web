@@ -4,11 +4,9 @@
       <div @click="game">GAMES</div>
     </div>
     <slot></slot>
-    <div class="end">
-      <a href="/static/mobile/html/terms_of_service.html" target="_blank">Terms &amp; Conditions</a>
-      <a href="/static/mobile/html/privacy_policy.html" target="_blank">Privacy</a>
-      <a href="/static/mobile/html/cookies_policy.html" target="_blank">Cookies</a>
-      <a href="/static/mobile/html/contact.html" target="_blank">Contact us</a>
+    <div class="end" v-if="bottomHide == false ? false : true">
+      <a @click="privacyClick">Privacy</a>
+      <a  @click="contactClick">Contact us</a>
     </div>
   </div>
 </template>
@@ -16,11 +14,38 @@
 <script>
 export default {
   name: "StartAndEnd",
+  props: ["bottomHide"],
+  data() {
+    return {
+
+    }
+  },
+  mounted() {
+    console.log(this.bottomHide);
+  },
   methods: {
     game() {
       this.$router.push({
         path: '/M/homeIndex'
       })
+    },
+    privacyClick() {
+      let pathInfo = this.$router.resolve({
+        path: '/privacy',
+        query: {
+          routeType: 1, // 不走App.vue文件的判断
+        }
+      })
+      window.open(pathInfo.href, '_blank')
+    },
+    contactClick() {
+      let pathInfo = this.$router.resolve({
+        path: '/contactUs',
+        query: {
+          routeType: 1, // 不走App.vue文件的判断
+        }
+      })
+      window.open(pathInfo.href, '_blank')
     }
   }
 }

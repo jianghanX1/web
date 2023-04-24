@@ -11,7 +11,9 @@
           <el-input
             placeholder="Search Games"
             prefix-icon="el-icon-search"
-            v-model="searchInput">
+            v-model="searchInput"
+            @keyup.enter.native="searchClick"
+          >
           </el-input>
         </div>
         <div class="position" :style="positionMenu ? 'display: block' : 'display: none'" @mouseleave="mouseleave">
@@ -36,7 +38,18 @@ export default {
     this.getGameType1()
   },
   methods: {
+    // 搜索
+    searchClick() {
+      this.$router.push({
+        path: '/P/gameType',
+        query: {
+          gameType: this.$route.query && this.$route.query.gameType,
+          searchValue: this.searchInput.trim()
+        }
+      },()=>{})
+    },
     positionMenuClick() {
+      this.searchInput = null
       this.positionMenu = !this.positionMenu
       console.log(this.positionMenu);
     },
@@ -59,15 +72,18 @@ export default {
       })
     },
     vigooGamesClick() {
+      this.searchInput = null
       this.$router.push({
         path: '/'
       },()=>{})
     },
     newGamesClick(gameType) {
+      this.searchInput = null
       this.$router.push({
         path: '/P/gameType',
         query: {
-          gameType
+          gameType,
+          searchValue: null
         }
       },()=>{})
     },

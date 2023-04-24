@@ -24,13 +24,23 @@ export default {
   methods: {
     getList() {
       const { query } = this.$route
-      const { gameType } = query || {}
+      const { gameType, searchValue } = query || {}
       getGameList(gameType).then((res)=>{
         console.log(res);
         const { data } = res || {}
         const { code, data:dataObj } = data || {}
         if (code == 1) {
-          this.gameList = dataObj
+          if (searchValue) {
+            let arr = []
+            dataObj && dataObj.map((item)=>{
+              if (item.gameName.includes(`${searchValue}`)) {
+                arr.push(item)
+              }
+            })
+            this.gameList = arr || []
+          } else {
+            this.gameList = dataObj
+          }
         } else {
           this.$message.error('数据加载失败')
         }

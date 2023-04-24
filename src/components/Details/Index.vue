@@ -22,7 +22,7 @@
           <div class="game-bar">
             <div class="bar-app-icon"><img :src="gameInfo.iconUrl" alt=""></div>
             <div class="bar-btns">
-              <div class="download" v-if="$store.state.deferredPromptType"><span class="add-button" @click="addToDesktop">Add to Desktop</span></div>
+              <div class="download" v-if="$store.state.deferredPromptType" @click="addToDesktop"><span>Add to Desktop</span></div>
               <div class="play-tag" @click="getGameType1(gameInfo.gameType)"><span>Play {{ gameInfo.gameType }} Games</span></div>
               <div class="full-btn" @click="amplifyClick"><i class="el-icon-rank"></i></div>
             </div>

@@ -41,16 +41,13 @@
     <div>PRIVACY POLICY</div>
     <br/>
     <p>Copyright ah5game.com. All rights reserved.</p>
-    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
-import BottomNav from '@/components/BottomNav';
 export default {
   name: "privacyIndex",
   components: {
-    BottomNav
   },
 }
 </script>
@@ -60,7 +57,8 @@ export default {
   width: 100%;
   height: 100vh;
   background: white;
-  padding-left: 10px;
   box-sizing: border-box;
+  padding: 20px;
+  overflow: auto;
 }
 </style>

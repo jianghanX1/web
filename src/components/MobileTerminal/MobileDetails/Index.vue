@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mobile-details" :style="playValue ? {display: 'none'} : {display: 'block'}" id="mobile-details">
-      <StartAndEnd>
+      <StartAndEnd :bottomHide="false">
       <div class="details-top-box" :style="playValue1 ? {display: 'none'} : {display: 'block'}">
         <div class="app-base">
           <div class="app-pic"><img :src="iconUrl" alt=""></div>
@@ -24,7 +24,7 @@
           <div class="desc-text">{{ description }}</div>
         </div>
         <div class="seo-tags">
-          <a class="seo-tag" :style="index % 2 == 0 ? 'color: #f5b417' : index % 3 == 0 ? 'color: #54abd7' : 'color: #ff6215'" v-for="(item,index) in typeList" :key="index">{{ item.name }}</a>
+          <a class="seo-tag" :style="index % 2 == 0 ? 'color: #f5b417' : index % 3 == 0 ? 'color: #54abd7' : 'color: #ff6215'" v-for="(item,index) in typeList" :key="index" @click="classClick(item.code)">{{ item.name }}</a>
         </div>
       </div>
       <div class="details-recommend-box" :style="playValue1 ? {display: 'none'} : {display: 'block'}">
@@ -95,6 +95,16 @@ export default {
     this.getInfo()
   },
   methods: {
+    // 跳转分类
+    classClick(gameType) {
+      this.$router.push({
+        path: '/M/gameType',
+        query: {
+          gameType
+        }
+      })
+    },
+
     // 获取游戏详情
     getInfo() {
       this.playValue1= true
@@ -169,9 +179,11 @@ export default {
         this.isTop = false
       }
     },
+    // 置顶
     isTopClick () {
       document.getElementById('mobile-details').scrollTop = 0
     },
+    // 开始游戏
     playClick() {
       this.playValue = true
       let arr = []
@@ -189,10 +201,12 @@ export default {
         this.gameShuffleList = shuffleArr.splice(0,5)
       },10000)
     },
+    // 返回
     backClick() {
       this.playValue = false
       clearInterval(this.timer)
     },
+    // 跳转详情
     detailsClick(item) {
       this.$router.push({
         path: '/M/details',

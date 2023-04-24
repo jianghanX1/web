@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div v-if="determinePcOrMove == 2">
-      <Navigation></Navigation>
+      <Navigation v-if="navHide"></Navigation>
       <router-view></router-view>
-      <BottomNav></BottomNav>
+      <BottomNav v-if="navHide"></BottomNav>
     </div>
     <div v-else>
       <router-view></router-view>
@@ -22,7 +22,15 @@ export default {
   },
   data() {
     return {
-      determinePcOrMove: determinePcOrMove()
+      determinePcOrMove: determinePcOrMove(),
+      navHide: true
+    }
+  },
+  mounted() {
+    console.log(this.$route);
+    const { name } = this.$route
+    if (name == 'privacy' || name == 'contactUs') {
+      this.navHide = false
     }
   }
 }
