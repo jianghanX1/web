@@ -33,12 +33,13 @@ module.exports = defineConfig({
     open: true,
     // 代理链接配置
     proxy: {
-      "/api": {
+      [process.env.VUE_APP_ENV_PATH]: {
         target: process.env.VUE_APP_ENV_PATH,
         changeOrigin: true,
         pathRewrite: {
-          "^/api": ""
+          ["^" + process.env.VUE_APP_ENV_PATH]: process.env.VUE_APP_ENV_PATH
         },
+        logLevel: 'debug',
         secure: true,
       }
     }
@@ -49,12 +50,13 @@ module.exports = defineConfig({
     open: true,
     // 代理链接配置
     proxy: {
-      "/api": {
+      [process.env.VUE_APP_ENV_PATH]: {
         target: process.env.VUE_APP_ENV_PATH,
         changeOrigin: true,
         pathRewrite: {
-          "^/api": ""
+          ["^" + process.env.VUE_APP_ENV_PATH]: process.env.VUE_APP_ENV_PATH
         },
+        logLevel: 'debug',
         secure: true,
       }
     }

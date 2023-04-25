@@ -3,7 +3,7 @@ import { Message, Loading } from 'element-ui'
 
 // 创建axios的对象
 const instance = axios.create({
-  // baseURL: "https://api.cat-shop.penkuoer.com",  //配置固定域名
+  baseURL: process.env.VUE_APP_ENV_PATH,  //配置固定域名
   timeout: 5000
 })
 // loading框设置局部刷新，且所有请求完成后关闭loading框

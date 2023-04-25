@@ -2,7 +2,7 @@ import request from '@/utils/request.js'
 // 获取全部游戏列表
 export function getGameList (gameType) {
   return request({
-    url: '/api/pmm/game/ranking/list',
+    url: '/pmm/game/ranking/list',
     method: 'get',
     params: {
       gameType
@@ -12,7 +12,7 @@ export function getGameList (gameType) {
 // 获取游戏详情
 export function getGameInfo (gameId) {
   return request({
-    url: '/api/pmm/game/info',
+    url: '/pmm/game/info',
     method: 'get',
     params: {
       gameId
@@ -22,7 +22,7 @@ export function getGameInfo (gameId) {
 // 获取游戏类型
 export function getGameType () {
   return  request({
-    url: '/api/pmm/system/dict',
+    url: '/pmm/system/dict',
     method: 'get',
     params: {
       dictTypes: 'game_type'
