@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="nav-bar">
-      <div @click="game">GAMES</div>
+      <div @click="game">AH5GAMES</div>
     </div>
     <slot></slot>
     <div class="end" v-if="bottomHide == false ? false : true">

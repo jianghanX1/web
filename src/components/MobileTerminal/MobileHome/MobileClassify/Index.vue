@@ -1,11 +1,13 @@
 <template>
-  <StartAndEnd>
-    <div>
-      <ClassList :gameTypeList="gameTypeList"></ClassList>
-      <BottomList :typeList="typeList"></BottomList>
-      <BottomText></BottomText>
-    </div>
-  </StartAndEnd>
+  <div id="mobile_classify">
+    <StartAndEnd>
+      <div>
+        <ClassList :gameTypeList="gameTypeList"></ClassList>
+        <BottomList :typeList="typeList"></BottomList>
+        <BottomText></BottomText>
+      </div>
+    </StartAndEnd>
+  </div>
 </template>
 
 <script>
@@ -42,7 +44,7 @@ export default {
   },
   mounted() {
     this.getGameList1()
-
+    window.addEventListener("scroll",this.handleScroll, true)
     // 获取游戏分类
     getGameType().then((res)=>{
       const { data } = res || {}
@@ -65,7 +67,11 @@ export default {
     })
   },
   methods: {
+    handleScroll() {
+      // console.log(document.getElementById('mobile_classify').scrollTop);
+    },
     getGameList1() {
+      document.getElementById('mobile_classify').scrollTop = 0
       const { query } = this.$route
       const { gameType } = query || {}
       // 获取游戏列表
@@ -93,5 +99,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+#mobile_classify{
+  height: 100vh;
+  overflow-y: auto;
+}
 </style>

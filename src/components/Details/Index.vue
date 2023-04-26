@@ -794,11 +794,14 @@ export default {
             height: 390px;
             overflow: hidden;
             .app-item {
-              margin-bottom: 6px;
+              margin-bottom: 8px;
               float: left;
               img{
                 background: white;
               }
+            }
+            .app-item:nth-child(2n-1){
+              margin-right: 6px;
             }
           }
         }
