@@ -3,7 +3,7 @@
 <!--    <div class="item"><img :src="img1" alt=""></div>-->
     <div class="item" @click="iconClick(item)" v-for="(item,index) in gameList" :key="index">
       <div class="item_position">
-        <img :src="item.iconUrl" alt="">
+        <img v-lazy="item.iconUrl" alt="">
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@
       <div class="bd-block">
         <p class="bd-block-title">Game selection</p>
         <p class="bd-block-text"> devotes itself to provide games for all ages. For example, you can find fierce types of games such as shooting and driving. Also, there are casual brain-burning games like puzzle and decryption games. Not only that, MMORPGs, strategy, or games that require long hours of operation also can be your options. Besides, we provide a series of unique online games for children. Parents, please trust us, that our website is very faith worthy, 100% safe, and child-friendly.
-          <br>Our most popular types of games: <br><a href="https://vigoo.com/t/en/vigoo/Shooting%20Games/" class="bd-link">Shooting Games</a><br><a href="https://vigoo.com/t/en/vigoo/Driving%20Games/" class="bd-link">Driving Games</a></p>
+          <br>Our most popular types of games: <br><br></p>
       </div>
       <div class="bd-block">
         <p class="bd-block-title">Contact Us</p>

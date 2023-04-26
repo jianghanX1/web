@@ -4,7 +4,7 @@
       <StartAndEnd :bottomHide="false">
       <div class="details-top-box" :style="playValue1 ? {display: 'none'} : {display: 'block'}">
         <div class="app-base">
-          <div class="app-pic"><img :src="iconUrl" alt=""></div>
+          <div class="app-pic"><img v-lazy="iconUrl" alt=""></div>
           <div class="app-info">
             <p class="app-name">{{ gameName }}</p>
             <div class="app-btns">
@@ -44,7 +44,7 @@
       </div>
       <div class="app-promote">
         <div class="promote-list">
-          <div class="item" @click="detailsClick(item)" v-for="(item,index) in gameShuffleList" :key="index"><img :src="item.iconUrl" alt=""></div>
+          <div class="item" @click="detailsClick(item)" v-for="(item,index) in gameShuffleList" :key="index"><img v-lazy="item.iconUrl" alt=""></div>
         </div>
       </div>
     </div>

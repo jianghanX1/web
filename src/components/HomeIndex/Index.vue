@@ -9,7 +9,7 @@
     <div class="recent-game">
       <div class="title">Recent game</div>
       <div class="content">
-        <div class="item" v-for="(item,index) in recentGameList" :key="index" @click="iconClick(item)"><img :src="item.iconUrl" alt=""></div>
+        <div class="item" v-for="(item,index) in recentGameList" :key="index" @click="iconClick(item)"><img v-lazy="item.iconUrl" alt=""></div>
       </div>
     </div>
   </div>

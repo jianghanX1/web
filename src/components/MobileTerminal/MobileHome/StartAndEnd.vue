@@ -6,7 +6,7 @@
     <slot></slot>
     <div class="end" v-if="bottomHide == false ? false : true">
       <a @click="privacyClick">Privacy</a>
-      <a  @click="contactClick">Contact us</a>
+      <a @click="contactClick">Contact us</a>
     </div>
   </div>
 </template>

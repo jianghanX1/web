@@ -1,6 +1,6 @@
 <template>
   <div class="top-box">
-    <div class="item" @click="detailsClick(item)" v-for="(item,index) in topGameList" :key="index"><img :src="item.iconUrl" alt=""></div>
+    <div class="item" @click="detailsClick(item)" v-for="(item,index) in topGameList" :key="index"><img v-lazy="item.iconUrl" alt=""></div>
   </div>
 </template>
 

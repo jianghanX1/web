@@ -1,6 +1,6 @@
 <template>
   <div class="bottom-list">
-    <div class="item" v-for="(item,index) in typeList" :key="index" @click="classClick(item.code)"><img :src="item.iconUrl" alt=""></div>
+    <div class="item" v-for="(item,index) in typeList" :key="index" @click="classClick(item.code)"><img v-lazy="item.iconUrl" alt=""></div>
   </div>
 </template>
 

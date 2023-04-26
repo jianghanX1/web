@@ -9,6 +9,15 @@ import { Button, Select, Input, Message } from 'element-ui'
 Vue.prototype.$axios = axios
 Vue.prototype.$message = Message
 Vue.config.productionTip = false
+
+// 引入插件
+import VueLazyload from 'vue-lazyload'
+// 注册插件
+Vue.use(VueLazyload,{
+  loading:'' // 懒加载默认图片
+})
+
+
 window.addEventListener('beforeinstallprompt', (e) => {
   // 防止 Chrome 67 及更早版本自动显示安装提示
   e.preventDefault();
