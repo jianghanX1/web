@@ -2,7 +2,7 @@
     <div>
       <div class="bj">
         <div class="bj_left">
-          <div class="title" @click="vigooGamesClick"><i class="el-icon-menu" @click.stop="positionMenuClick"></i> AH5 GAME</div>
+          <div class="title" @click="vigooGamesClick"><i class="el-icon-menu" @click.stop="positionMenuClick"></i> AH5 GAMES</div>
           <div class="nav-list">
             <div @click="newGamesClick(item.code)" v-for="(item,index) in gameTypeList" :key="index">{{ item.name }}</div>
           </div>
@@ -43,7 +43,6 @@ export default {
       this.$router.push({
         path: '/P/gameType',
         query: {
-          gameType: this.$route.query && this.$route.query.gameType,
           searchValue: this.searchInput.trim()
         }
       },()=>{})

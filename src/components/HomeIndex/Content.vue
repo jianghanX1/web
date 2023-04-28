@@ -32,12 +32,18 @@ export default {
         if (code == 1) {
           if (searchValue) {
             let arr = []
+            let newArr = []
             dataObj && dataObj.map((item)=>{
               if (item.gameName.includes(`${searchValue}`)) {
                 arr.push(item)
               }
+              newArr.push(item)
             })
-            this.gameList = arr || []
+            if (arr.length) {
+              this.gameList = arr || []
+            } else {
+              this.gameList = newArr.splice(0,30)
+            }
           } else {
             this.gameList = dataObj
           }

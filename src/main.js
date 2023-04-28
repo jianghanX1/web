@@ -4,7 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import { Button, Select, Input, Message } from 'element-ui'
+import { Button, Select, Input, Message, Form, FormItem } from 'element-ui'
 
 Vue.prototype.$axios = axios
 Vue.prototype.$message = Message
@@ -40,6 +40,8 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 Vue.use(Button)
 Vue.use(Select)
+Vue.use(Form)
+Vue.use(FormItem)
 Vue.use(Input)
 new Vue({
   router,

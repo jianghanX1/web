@@ -4,7 +4,7 @@
       <div class="main-game">
         <div class="game-part">
           <div class="game-container" :style="full">
-            <iframe :src="gameInfo.playUrl || null" width="100%" height="100%"></iframe>
+            <iframe :src="gameInfo.playUrl || null" width="100%" height="100%" id="iframe"></iframe>
             <div class="close" :style="closeStyle" @click="closeClick"><i class="el-icon-close" /></div>
             <div class="flex-games" v-show="isBlock" :style="leftHideStyle">
               <div class="btns">
@@ -519,12 +519,17 @@ export default {
 .details{
   margin: 10px auto 0;
   position: relative;
+  #iframe{
+    border: 1px solid #cccccc;
+  }
   .main-game {
     margin-bottom: 13px;
     height: 632px;
     .game-part {
       float: left;
       .game-container {
+        padding: 0 4px 4px 0;
+        box-sizing: border-box;
         .close{
           display: none;
         }
