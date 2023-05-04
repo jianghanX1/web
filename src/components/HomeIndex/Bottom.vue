@@ -1,7 +1,7 @@
 <template>
   <div class="bottom-box">
     <div class="bj" v-if="titleType == 1">
-      <div class="title">GAMES</div>
+      <div class="title">AH5 GAMES</div>
       <div class="small-title">Play online games on ah5game</div>
       <div class="text">
         ah5game.COM is one of the best free sites for online games. All games are in real-time, which means you can run these interesting games directly in your browser without downloading, logging, or paying. Above all, all ah5game GAMES are free ! Everyone can play the lasted games and the best games for free!
@@ -27,11 +27,7 @@
       </div>
     </div>
     <div class="bj" v-if="titleType == 3">
-      <div class="title">Girls Games</div>
-      <div class="small-title">What is Girls Games?</div>
-      <div class="text">
-        Girls games refer to games that are specially created for the majority of girls and are in line with girls’ personalities, including dress-up games, make-up games, cooking games, training games, etc.
-      </div>
+      <div class="title">AH5 Games</div>
       <div class="small-title">Role playing game</div>
       <div class="text">
         Role-play in the game, such as teachers, restaurant owners, chefs and other roles, complete different role tasks, and experience a diverse life!

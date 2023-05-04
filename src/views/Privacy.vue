@@ -13,20 +13,20 @@
       <br/>
       We gather user information to provide you with a customized experience on our site. Your user information helps us tailor the content, services, goods and advertising to your current and future needs. For this reason, we may ask you to register when you visit certain areas of our site. If you choose not to register you may not have access to areas that require personal identification.<br/>
       <br/>
-      <b>1. THE PERSONAL INFORMATION THAT ah5game GAMES COLLECTS AND RECEIVES</b>
+      <b>1. THE PERSONAL INFORMATION THAT AH5 GAMES COLLECTS AND RECEIVES</b>
       <br/>
       <br/>
-      We may collect Personal Information (including but not limited to your name, email number and other contact information) for providing services and contact you. AS described in this Privacy Policy, through ah5game GAMES Services, we may collects Personal Information for providing the Services and for other specific purposes. ah5game GAMES may change or update tools to collect information from time to time and may amend this privacy policy if the policy will be impacted by a new tool. When interacting with the Property, ah5game GAMES may collect/receive the following information, which includes Personal Information.<br/>
+      We may collect Personal Information (including but not limited to your name, email number and other contact information) for providing services and contact you. AS described in this Privacy Policy, through AH5 GAMES Services, we may collects Personal Information for providing the Services and for other specific purposes. ah5game GAMES may change or update tools to collect information from time to time and may amend this privacy policy if the policy will be impacted by a new tool. When interacting with the Property, ah5game GAMES may collect/receive the following information, which includes Personal Information.<br/>
       <br/>
-      <b>2. WHAT DOES ah5game GAMES DO WITH PERSONAL INFORMATION?</b>
+      <b>2. WHAT DOES AH5 GAMES DO WITH PERSONAL INFORMATION?</b>
       <br/>
       <br/>
-      We may provide, improve ourself and for other lawful purposes. ah5game GAMES uses the Personal Information that it collects and receives to provide the Services; to provide support. ah5game GAMES uses Personal Information to enforce its terms, policies and legal agreements, to abide by court orders and warrants, to collect debts, and assist law enforcement agencies, prevent fraud, misappropriation, infringements, identity thefts and any other misuse of the Services, and to take any action in any legal dispute and proceeding. ah5game GAMES dedicates to process Personal Information only for the purposes specified in this policy.<br/>
+      We may provide, improve ourself and for other lawful purposes. AH5 GAMES uses the Personal Information that it collects and receives to provide the Services; to provide support. ah5game GAMES uses Personal Information to enforce its terms, policies and legal agreements, to abide by court orders and warrants, to collect debts, and assist law enforcement agencies, prevent fraud, misappropriation, infringements, identity thefts and any other misuse of the Services, and to take any action in any legal dispute and proceeding. ah5game GAMES dedicates to process Personal Information only for the purposes specified in this policy.<br/>
       <br/>
       <b>3. INFORMATION SHARING</b>
       <br/>
       <br/>
-      We may share Personal Information about you with Demand and Supply Partners, with data enrichment sources, with our affiliates, with law enforcement and on a merger or an acquisition. ah5game GAMES will provide a prominent notice on the Site of any change in ownership or uses of this Personal Information if applicable. In any event, the entity which will assume the ownership of the Site will continue to protect Personal Information related to you under this Policy; Share it in any other circumstances where ah5game GAMES receives your written consent;<br/>
+      We may share Personal Information about you with Demand and Supply Partners, with data enrichment sources, with our affiliates, with law enforcement and on a merger or an acquisition. AH5 GAMES will provide a prominent notice on the Site of any change in ownership or uses of this Personal Information if applicable. In any event, the entity which will assume the ownership of the Site will continue to protect Personal Information related to you under this Policy; Share it in any other circumstances where ah5game GAMES receives your written consent;<br/>
       <br/>
       <b>4. COOKIES WE USE COOKIES</b>
       <br/>

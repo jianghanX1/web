@@ -1,7 +1,7 @@
 <template>
   <div class="bottom-text">
     <div class="b-desc">
-      <p class="bd-title">GAMES</p>
+      <p class="bd-title">AH5 GAMES</p>
       <div class="bd-block">
         <p class="bd-block-title">Play online games on ah5game</p>
         <p class="bd-block-text"> is one of the best free sites for online games. All games are in real-time, which means you can run these interesting games directly in your browser without downloading, logging, or paying. Above all, all GAMES are free ! Everyone can play the lasted games and the best games for free!</p>
