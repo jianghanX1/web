@@ -43,7 +43,7 @@
           </div>
         </div>
       </div>
-      <Bottom titleType="1" />
+      <Bottom />
     </div>
     <div class="main-float">
       <div class="float-ads">

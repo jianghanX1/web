@@ -3,38 +3,38 @@
     <div class="app-list" v-for="(item,index) in appGameList" :key="index">
       <div class="app-list-content">
         <div class="content-top">
-          <div class="item" @click="detailsClick" v-show="item[0] && item[0].iconUrl"><img v-lazy="item[0] && item[0].iconUrl" alt=""></div>
-          <div class="item" v-show="item[1] && item[1].iconUrl"><img v-lazy="item[1] && item[1].iconUrl" alt=""></div>
-          <div class="item" v-show="item[2] && item[2].iconUrl"><img v-lazy="item[2] && item[2].iconUrl" alt=""></div>
+          <div class="item" @click="detailsClick" v-if="item[0] && item[0].iconUrl"><img v-lazy="item[0] && item[0].iconUrl" alt=""></div>
+          <div class="item" v-if="item[1] && item[1].iconUrl"><img v-lazy="item[1] && item[1].iconUrl" alt=""></div>
+          <div class="item" v-if="item[2] && item[2].iconUrl"><img v-lazy="item[2] && item[2].iconUrl" alt=""></div>
         </div>
         <div class="content-middle" v-if="(index + 1) % 2 !== 0">
-          <div class="middle-left">
-            <div class="item" v-show="item[3] && item[3].iconUrl"><img v-lazy="item[3] && item[3].iconUrl" alt=""></div>
+          <div class="middle-left" v-if="item[3] && item[3].iconUrl">
+            <div class="item"><img v-lazy="item[3] && item[3].iconUrl" alt=""></div>
           </div>
           <div class="middle-right">
-            <div class="item-box" v-show="item[4] && item[4].iconUrl"><div class="item"><img v-lazy="item[4] && item[4].iconUrl" alt=""></div></div>
-            <div class="item-box" v-show="item[5] && item[5].iconUrl"><div class="item"><img v-lazy="item[5] && item[5].iconUrl" alt=""></div></div>
+            <div class="item-box" v-if="item[4] && item[4].iconUrl"><div class="item"><img v-lazy="item[4] && item[4].iconUrl" alt=""></div></div>
+            <div class="item-box" v-if="item[5] && item[5].iconUrl"><div class="item"><img v-lazy="item[5] && item[5].iconUrl" alt=""></div></div>
           </div>
           <div></div>
         </div>
         <div class="content-middle" v-if="(index + 1) % 2 === 0">
           <div class="middle-right">
-            <div class="item-box" v-show="item[3] && item[3].iconUrl"><div class="item"><img v-lazy="item[3] && item[3].iconUrl" alt=""></div></div>
-            <div class="item-box" v-show="item[4] && item[4].iconUrl"><div class="item"><img v-lazy="item[4] && item[4].iconUrl" alt=""></div></div>
+            <div class="item-box" v-if="item[3] && item[3].iconUrl"><div class="item"><img v-lazy="item[3] && item[3].iconUrl" alt=""></div></div>
+            <div class="item-box" v-if="item[4] && item[4].iconUrl"><div class="item"><img v-lazy="item[4] && item[4].iconUrl" alt=""></div></div>
           </div>
-          <div class="middle-left2">
-            <div class="item" v-show="item[5] && item[5].iconUrl"><img v-lazy="item[5] && item[5].iconUrl" alt=""></div>
+          <div class="middle-left2" v-if="item[5] && item[5].iconUrl">
+            <div class="item"><img v-lazy="item[5] && item[5].iconUrl" alt=""></div>
           </div>
           <div></div>
         </div>
         <div class="content-top">
-          <div class="item" v-show="item[6] && item[6].iconUrl"><img v-lazy="item[6] && item[6].iconUrl" alt=""></div>
-          <div class="item" v-show="item[7] && item[7].iconUrl"><img v-lazy="item[7] && item[7].iconUrl" alt=""></div>
-          <div class="item" v-show="item[8] && item[8].iconUrl"><img v-lazy="item[8] && item[8].iconUrl" alt=""></div>
+          <div class="item" v-if="item[6] && item[6].iconUrl"><img v-lazy="item[6] && item[6].iconUrl" alt=""></div>
+          <div class="item" v-if="item[7] && item[7].iconUrl"><img v-lazy="item[7] && item[7].iconUrl" alt=""></div>
+          <div class="item" v-if="item[8] && item[8].iconUrl"><img v-lazy="item[8] && item[8].iconUrl" alt=""></div>
         </div>
         <div class="content-bottom">
-          <div class="item-box" v-show="item[9] && item[9].iconUrl"><div class="item"><img v-lazy="item[9] && item[9].iconUrl" alt=""></div></div>
-          <div class="item-box" v-show="item[10] && item[10].iconUrl"><div class="item"><img v-lazy="item[10] && item[10].iconUrl" alt=""></div></div>
+          <div class="item-box" v-if="item[9] && item[9].iconUrl"><div class="item"><img v-lazy="item[9] && item[9].iconUrl" alt=""></div></div>
+          <div class="item-box" v-if="item[10] && item[10].iconUrl"><div class="item"><img v-lazy="item[10] && item[10].iconUrl" alt=""></div></div>
         </div>
       </div>
       <div class="adv" v-if="index === 0"><h6 class="adv-title">Advertisement</h6></div>

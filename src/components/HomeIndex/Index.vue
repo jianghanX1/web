@@ -2,9 +2,7 @@
   <div class="big">
     <div>
       <Content></Content>
-      <Bottom
-        titleType="1"
-      />
+      <Bottom />
     </div>
     <div class="recent-game">
       <div class="title">Recent game</div>

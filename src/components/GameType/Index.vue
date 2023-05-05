@@ -2,9 +2,7 @@
   <div>
     <Content></Content>
     <div class="new-games-bottom">
-      <Bottom
-        titleType="2"
-      />
+      <Bottom />
     </div>
   </div>
 </template>
