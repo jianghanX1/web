@@ -78,9 +78,8 @@ export default {
     .content-top{
       width: 100%;
       box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
       .item{
+        float: left;
         width: 5.875rem;
         height: 5.875rem;
         border-radius: 0.875rem;
@@ -95,6 +94,13 @@ export default {
       .item:not(:last-child){
         margin-right: 0.561rem;
       }
+    }
+    .content-top:after{
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
     }
     .content-middle{
       margin-top: 0.5625rem;

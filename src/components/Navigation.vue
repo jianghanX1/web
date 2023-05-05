@@ -129,7 +129,7 @@ export default {
     .bj_left{
       display: flex;
       .title{
-        min-width: 155px;
+        min-width: 166px;
         line-height: 56px;
         font-size: 22px;
         font-weight: bold;
