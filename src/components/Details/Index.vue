@@ -4,7 +4,7 @@
       <div class="main-game">
         <div class="game-part">
           <div class="game-container" :style="full">
-            <iframe :src="gameInfo.playUrl || null" width="100%" height="100%" id="iframe"></iframe>
+            <iframe :src="gameInfo.playUrl ? gameInfo.playUrl : null" width="100%" height="100%" id="iframe"></iframe>
             <div class="close" :style="closeStyle" @click="closeClick"><i class="el-icon-close" /></div>
             <div class="flex-games" v-show="isBlock" :style="leftHideStyle">
               <div class="btns">
@@ -114,7 +114,8 @@ export default {
         height: "100%",
         left: 0,
         top: 0,
-        zIndex: 999
+        zIndex: 999,
+        background: '#0054ff'
       },
       closeStyle: null,
       isBlock: false, // 展示大屏广告状态
@@ -258,8 +259,8 @@ export default {
     // 动态加载PWA图标
     manifestIcon(gameInfo) {
       let myDynamicManifest = {
-        "short_name": "阿凡太",
-        "name": "阿凡太",
+        "short_name": "AH5 GAMES",
+        "name": "AH5 GAMES",
         "start_url": `${window.location.href}`,
         "display": "standalone",
         "background_color": "#0054ff",

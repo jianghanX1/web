@@ -117,7 +117,7 @@ export default {
         this.$refs[form].validate((valid) => {
           if (valid) {
             request({
-              url: 'https://formspree.io/f/mqkowrdq',
+              url: 'https://formspree.io/f/xrgvjyay',
               method: 'post',
               data: {
                 name: this.formData.name,
