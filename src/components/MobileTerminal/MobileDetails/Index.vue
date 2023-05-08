@@ -7,11 +7,11 @@
           <div class="app-pic"><img :src="iconUrl" alt=""></div>
           <div class="app-info">
             <p class="app-name">{{ gameName }}</p>
-            <div class="app-btns">
-              <div class="app-collection">
+<!--            <div class="app-btns">-->
+<!--              <div class="app-collection">-->
 
-              </div>
-            </div>
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </div>
         <button class="app-play" @click="playClick">
@@ -280,6 +280,8 @@ export default {
       padding-top: 0.5rem;
       float: left;
       margin-left: 0.9375rem;
+      height: 4.75rem;
+      line-height: 4.75rem;
       .app-name{
         color: #fff;
         font-size: 1rem;
