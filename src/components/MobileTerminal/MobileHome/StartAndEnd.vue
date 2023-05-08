@@ -27,7 +27,7 @@ export default {
     game() {
       this.$router.push({
         path: '/M/homeIndex'
-      })
+      },()=>{})
     },
     privacyClick() {
       let pathInfo = this.$router.resolve({
@@ -60,7 +60,7 @@ export default {
   left: 0;
   box-shadow: 0 0.125rem 0.1875rem 0 rgba(0,16,63,.4);
   background-color: #f83123;
-  z-index: 1;
+  z-index: 5;
   div{
     font-size: 1.125rem;
     text-align: center;

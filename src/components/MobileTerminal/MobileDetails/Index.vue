@@ -6,7 +6,7 @@
         <div class="app-base">
           <div class="app-pic"><img :src="iconUrl" alt=""></div>
           <div class="app-info">
-            <p class="app-name">{{ gameName }}</p>
+            <div class="app-name">{{ gameName }}</div>
 <!--            <div class="app-btns">-->
 <!--              <div class="app-collection">-->
 
@@ -87,7 +87,7 @@ export default {
         query: {
           gameId
         }
-      })
+      },()=>{})
     }
   },
   mounted() {
@@ -102,7 +102,7 @@ export default {
         query: {
           gameType
         }
-      })
+      },()=>{})
     },
 
     // 获取游戏详情
@@ -262,14 +262,17 @@ export default {
       clear: both;
       visibility: hidden;
     }
+    .app-base{
+      display: flex;
+    }
     .app-pic{
       margin-left: 0.625rem;
       border: 2px solid #fff;
       border-radius: 0.625rem;
       overflow: hidden;
-      width: 4.75rem;
+      min-width: 4.75rem;
+      max-width: 4.75rem;
       height: 4.75rem;
-      float: left;
       background-color: #fff;
       img{
         width: 100%;
@@ -278,14 +281,12 @@ export default {
     }
     .app-info{
       padding-top: 0.5rem;
-      float: left;
       margin-left: 0.9375rem;
-      height: 4.75rem;
-      line-height: 4.75rem;
       .app-name{
         color: #fff;
         font-size: 1rem;
         font-weight: 700;
+        word-break: break-all;
       }
       .app-btns{
         margin-top: 0.6875rem;
@@ -430,7 +431,7 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 5;
   background-color: #0b2167;
   overflow: hidden;
   .app-iframe{
@@ -439,6 +440,11 @@ export default {
     .iframe-box{
       width: 100%;
       height: 100%;
+      padding: 0 2px 2px 0;
+      box-sizing: border-box;
+      #gameIframe{
+        border: 1px solid #cccccc;
+      }
     }
   }
 }
@@ -502,6 +508,62 @@ export default {
     border-radius: 0.875rem;
     color: #333;
     overflow: hidden;
+    background-color: #e4e4e4;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+@media screen and (orientation: landscape){
+  .app-module{
+    display: flex!important;
+    flex-direction: row-reverse;
+  }
+  .app-iframe {
+    width: calc(100vw - 4.375rem);
+    height: 100%!important;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+    position: relative;
+    .iframe-back{
+      text-align: center;
+      position: absolute;
+      left: 0;
+      top: 0.633803rem;
+      box-shadow: 0 0.0714rem 0 0.0357rem rgb(52 126 223);
+      border-radius: 0 0.6429rem 0.6429rem 0;
+      overflow: hidden;
+      width: 1.9286rem;
+      height: 1.25rem;
+      background-color: #589df7;
+      /deep/ .el-icon-arrow-left{
+        font-size: 1rem;
+        color: #ffffff;
+        line-height: 1rem;
+      }
+    }
+  }
+  .app-promote {
+    height: 100%;
+    width: 2.353521rem;
+    overflow: hidden;
+    background-color: #0073dd;
+  }
+  .app-promote .promote-list {
+    height: 100%;
+    overflow: hidden;
+  }
+  .app-promote .promote-list .item{
+    width: 1.971831rem;
+    height: 1.971831rem;
+    margin: 0.23rem auto 0;
+    display: block;
+    border-radius: 0.492958rem;
+    overflow: hidden;
+    font-size: .422535rem;
+    color: #333;
     background-color: #e4e4e4;
     img{
       width: 100%;

@@ -39,7 +39,7 @@ export default {
         query: {
           gameType
         }
-      })
+      },()=>{})
     }
   },
   mounted() {

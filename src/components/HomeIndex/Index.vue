@@ -32,7 +32,7 @@ export default {
     if (determinePcOrMove() == 1) {
       this.$router.push({
         path: '/M/homeIndex'
-      })
+      },()=>{})
     }
   },
   mounted() {
@@ -61,7 +61,7 @@ export default {
         query: {
           gameId: item.gameId
         }
-      })
+      },()=>{})
     }
   }
 }

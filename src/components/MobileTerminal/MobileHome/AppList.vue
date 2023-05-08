@@ -61,7 +61,7 @@ export default {
         query: {
           gameId: item.gameId
         }
-      })
+      },()=>{})
     }
   }
 }

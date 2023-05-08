@@ -137,7 +137,7 @@ export default {
         query: {
           gameId
         }
-      })
+      },()=>{})
     }
   },
   mounted() {
@@ -183,7 +183,7 @@ export default {
                   query: {
                     gameType: item.code
                   }
-                })
+                },()=>{})
               }
             })
             return
@@ -303,7 +303,7 @@ export default {
         query: {
           gameId
         }
-      })
+      },()=>{})
     },
      // 点击放大游戏
     amplifyClick() {

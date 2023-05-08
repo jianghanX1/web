@@ -38,6 +38,15 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
   })
 });
+// 监听横屏竖屏切换
+window.addEventListener('orientationchange', function() {
+  if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+    setTimeout(()=>{
+      //fontsize计算
+      document.documentElement.style.fontSize = document.documentElement.clientWidth/320 * 16 +'px'
+    },100)
+  }
+});
 Vue.use(Button)
 Vue.use(Select)
 Vue.use(Form)

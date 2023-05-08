@@ -37,7 +37,7 @@ export default {
     if (determinePcOrMove() == 2) {
       this.$router.push({
         path: '/P/homeIndex'
-      })
+      },()=>{})
     }
   },
   mounted() {
