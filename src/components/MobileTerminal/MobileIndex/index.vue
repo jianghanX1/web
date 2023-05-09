@@ -16,8 +16,16 @@ import AppList from "@/components/MobileTerminal/MobileHome/AppList";
 import BottomList from "@/components/MobileTerminal/MobileHome/BottomList";
 import BottomText from "@/components/MobileTerminal/MobileHome/BottomText";
 
-import img1 from '@/assets/gameType01.jpg'
-import img2 from '@/assets/gameType02.jpg'
+import shooting from '@/assets/01shooting.jpg';
+import car from '@/assets/02car.jpg';
+import ball from '@/assets/03ball.jpg';
+import girls from '@/assets/04girls.jpg';
+import casual from '@/assets/05casu.jpg';
+import puzzle from '@/assets/06puzzle.jpg';
+import action from '@/assets/07action.jpg';
+import racing from '@/assets/08racing.jpg';
+import parkour from '@/assets/09parkour.jpg';
+import sand from '@/assets/093d.jpg';
 
 import { getGameList, determinePcOrMove, getGameType } from '@/utils/utils.js'
 export default {
@@ -27,7 +35,16 @@ export default {
       topGameList: [], // 移动端头部游戏列表
       appGameList: [], // 中间游戏列表
       gameTypeList: [], // 底部游戏类型
-      img1,img2
+      shooting,
+      car,
+      ball,
+      girls,
+      casual,
+      puzzle,
+      action,
+      racing,
+      parkour,
+      sand,
     }
   },
   components: {
@@ -64,12 +81,17 @@ export default {
       const { code, data:dataObj } = data || {}
       const { game_type } = dataObj || {}
       if (code == 1) {
-        game_type && game_type.map((item,index)=>{
-            if (index % 2 == 0) {
-              item.iconUrl = this.img1
-            } else {
-              item.iconUrl = this.img2
-            }
+        game_type && game_type.map(()=>{
+            game_type[0].iconUrl = this.shooting
+            game_type[1].iconUrl = this.car
+            game_type[2].iconUrl = this.ball
+            game_type[3].iconUrl = this.girls
+            game_type[4].iconUrl = this.casual
+            game_type[5].iconUrl = this.puzzle
+            game_type[6].iconUrl = this.action
+            game_type[7].iconUrl = this.racing
+            game_type[8].iconUrl = this.parkour
+            game_type[9].iconUrl = this.sand
         })
         this.gameTypeList = game_type
       } else {
