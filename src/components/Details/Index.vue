@@ -51,7 +51,7 @@
           <div class="ads-title"></div>
           <div class="ads-container"></div>
         </div>
-        <div class="ads-bottom">
+        <div class="ads-bottom" id="adsBottom">
           <div class="ads-title"></div>
           <div class="ads-container"></div>
         </div>
@@ -141,8 +141,10 @@ export default {
     }
   },
   mounted() {
-    let headdiv=document.getElementById("girlsGames");
+    let headdiv = document.getElementById("girlsGames");
+    let adsBottom = document.getElementById("adsBottom");
     let nTop = headdiv.offsetTop;
+    let adsBottomTop = adsBottom.offsetTop;
     window.onscroll = function () {
       //变量scrollTop是滚动条滚动时，距离顶部的距离
       let scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
@@ -154,6 +156,12 @@ export default {
         headdiv.style.top = "10px"
       } else {
         headdiv.style.position="relative";
+      }
+      if (scrollTop > adsBottomTop) {
+        adsBottom.style.position = "fixed"
+        adsBottom.style.top = "10px"
+      } else {
+        adsBottom.style.position="relative";
       }
     }
     this.getGameType1()
