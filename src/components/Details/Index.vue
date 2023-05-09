@@ -156,12 +156,14 @@ export default {
         headdiv.style.top = "10px"
       } else {
         headdiv.style.position="relative";
+        headdiv.style.top = "0px"
       }
-      if (scrollTop > adsBottomTop) {
+      if (scrollTop > adsBottomTop + 2) {
         adsBottom.style.position = "fixed"
         adsBottom.style.top = "10px"
       } else {
         adsBottom.style.position="relative";
+        adsBottom.style.top = '0px'
       }
     }
     this.getGameType1()
