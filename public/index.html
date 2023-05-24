@@ -8,9 +8,19 @@
     <title>AH5 GAMES</title>
       <meta name="theme-color" content="#080403">
       <link rel="manifest" id="manifest" href="/manifest.json">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9846530703102193" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="app"></div>
+    <script>
+        window['addAds'] = function () {
+            let childList = document.getElementsByClassName('adv')
+            console.log(childList);
+            for (let i = 0; i < childList.length; i++) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+        }
+    </script>
     <!-- built files will be auto injected -->
   </body>
 <style>
