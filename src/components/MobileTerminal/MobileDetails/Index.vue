@@ -65,7 +65,7 @@
 import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
 import { getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType } from "@/utils/utils";
-import { show_newAfg_preroll } from '@/utils/ah5sdk';
+import { show_newAfg_preroll } from '../../../../ah5sdk';
 export default {
   name: "mobileDetailsIndex",
   components: {
