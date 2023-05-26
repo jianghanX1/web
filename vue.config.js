@@ -2,6 +2,8 @@ const { defineConfig } = require('@vue/cli-service')
 console.info(process.env.NODE_ENV,"====");
 console.info(process.env.VUE_APP_ENV_PATH,"====");
 module.exports = defineConfig({
+  // 关闭eslint语法验证
+  lintOnSave: false,
   transpileDependencies: true,
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   pwa: {

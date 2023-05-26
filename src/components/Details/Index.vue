@@ -184,9 +184,13 @@ export default {
         const { code, data:dataObj } = data || {}
         const { game_type } = dataObj || {}
         if (code == 1) {
-          let arr = game_type && game_type.splice(0,3) || []
+          let oldArr = []
+          game_type && game_type.map((item)=>{
+            oldArr.push(item)
+          })
+          let arr = oldArr && oldArr.splice(0,3) || []
           if (gameType) {
-            arr.map((item)=>{
+            game_type && game_type.map((item)=>{
               if (item.name == gameType) {
                 this.$router.push({
                   path: '/P/gameType',

@@ -61,11 +61,11 @@
     </div>
   </div>
 </template>
-
 <script>
 import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
 import { getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType } from "@/utils/utils";
+import { show_newAfg_preroll } from '@/utils/ah5sdk';
 export default {
   name: "mobileDetailsIndex",
   components: {
@@ -196,6 +196,9 @@ export default {
     },
     // 开始游戏
     playClick() {
+      // 广告
+      show_newAfg_preroll().show_newAfg_preroll()
+      console.log(1111111111111111111);
       this.playValue = true
       let arr = []
       this.gameTypeList.map((item)=>{
