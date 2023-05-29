@@ -1,6 +1,8 @@
 <template>
   <div class="top-box">
-    <div class="item" @click="detailsClick(item)" v-for="(item,index) in topGameList" :key="index"><img v-lazy="item.iconUrl" alt=""></div>
+    <div class="item" v-for="(item,index) in topGameList" :key="index">
+      <a :href="'/#/M/details?gameId='+item.gameId"><img v-lazy="item.iconUrl" alt=""></a>
+    </div>
   </div>
 </template>
 
@@ -14,14 +16,14 @@ export default {
     }
   },
   methods: {
-    detailsClick(item) {
-      this.$router.push({
-        path: '/M/details',
-        query: {
-          gameId: item.gameId
-        }
-      },()=>{})
-    }
+    // detailsClick(item) {
+    //   this.$router.push({
+    //     path: '/M/details',
+    //     query: {
+    //       gameId: item.gameId
+    //     }
+    //   },()=>{})
+    // }
   }
 }
 </script>

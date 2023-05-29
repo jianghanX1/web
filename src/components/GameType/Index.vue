@@ -27,6 +27,9 @@ export default {
         }
       },()=>{})
     }
+  },
+  mounted() {
+    document.title = 'AH5 GAMES'
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-title :data-title="gameName + ' - ' + 'Play' + ' ' + gameName + ' Online at ah5game.com'">
     <div class="mobile-details" :style="playValue ? {display: 'none'} : {display: 'block'}" id="mobile-details">
       <StartAndEnd :bottomHide="false">
       <div class="details-top-box" :style="playValue1 ? {display: 'none'} : {display: 'block'}">
@@ -52,7 +52,7 @@
       </div>
       <div class="app-promote">
         <div class="promote-list">
-          <div class="item" @click="detailsClick(item)" v-for="(item,index) in gameShuffleList" :key="index"><img :src="item.iconUrl" alt=""></div>
+          <div class="item" @click="detailsClick()" v-for="(item,index) in gameShuffleList" :key="index"><a :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img :src="item.iconUrl" alt=""></a></div>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
 <script>
 import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
-import { getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType } from "@/utils/utils";
+import {getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType, setMeta} from "@/utils/utils";
 import { show_newAfg_preroll } from '../../../../ah5sdk';
 export default {
   name: "mobileDetailsIndex",
@@ -132,6 +132,8 @@ export default {
           this.iconUrl = iconUrl
           this.description = description
           this.playUrl = playUrl
+
+          setMeta(`${gameName},${gameName} Online,${gameName} for free`,`${gameName} is a ${gameType} Games`)
           this.getGameType1(gameType)
         }
       }).catch((err)=>{
@@ -198,7 +200,7 @@ export default {
     playClick() {
       // 广告
       show_newAfg_preroll().show_newAfg_preroll()
-      console.log(1111111111111111111);
+
       this.playValue = true
       let arr = []
       this.gameTypeList.map((item)=>{
@@ -221,13 +223,13 @@ export default {
       clearInterval(this.timer)
     },
     // 跳转详情
-    detailsClick(item) {
-      this.$router.push({
-        path: '/M/details',
-        query: {
-          gameId: item.gameId
-        }
-      },()=>{})
+    detailsClick() {
+      // this.$router.push({
+      //   path: '/M/details',
+      //   query: {
+      //     gameId: item.gameId
+      //   }
+      // },()=>{})
       this.playValue = false
     }
   },
@@ -268,7 +270,8 @@ export default {
     }
   }
   .details-top-box{
-    margin-top: 3.5625rem;
+    //margin-top: 3.5625rem;
+    margin-top: 0.75rem;
     .app-base:after{
       content: ".";
       display: block;

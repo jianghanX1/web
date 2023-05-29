@@ -1,12 +1,14 @@
 <template>
-  <StartAndEnd>
-    <div>
-      <TopBox :topGameList="topGameList"></TopBox>
-      <AppList :appGameList="appGameList"></AppList>
-      <BottomList :typeList="gameTypeList"></BottomList>
-      <BottomText></BottomText>
-    </div>
-  </StartAndEnd>
+  <div v-title data-title="AH5 GAMES">
+    <StartAndEnd>
+      <div>
+        <TopBox :topGameList="topGameList"></TopBox>
+        <AppList :appGameList="appGameList"></AppList>
+        <BottomList :typeList="gameTypeList"></BottomList>
+        <BottomText></BottomText>
+      </div>
+    </StartAndEnd>
+  </div>
 </template>
 
 <script>

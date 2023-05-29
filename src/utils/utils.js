@@ -52,3 +52,18 @@ export function determinePcOrMove() {
     return 2
   }
 }
+/**
+ * 配置 seo
+ * @param title 网页标题
+ * @param key 关键词
+ * @param des 描述
+ */
+export function setMeta (key,des){
+  // let  title_default = "网站名称";
+  // if(title){
+  //   title_default += title;
+  // }
+  // document.title = title_default;
+  document.querySelector("meta[name='keywords']").setAttribute('content', key);
+  document.querySelector("meta[name='description']").setAttribute('content', des);
+}

@@ -47,6 +47,24 @@ window.addEventListener('orientationchange', function() {
     },100)
   }
 });
+
+// 修改title
+Vue.directive('title', {
+  // 单个修改标题
+  update: function (el) {
+    console.log(el.dataset.title);
+    if (el.dataset.title) {
+      setTimeout(()=>{
+        document.title = el.dataset.title
+      })
+    } else {
+      setTimeout(()=>{
+        document.title = 'AH5 GAMES'
+      })
+    }
+  }
+})
+
 Vue.use(Button)
 Vue.use(Select)
 Vue.use(Form)

@@ -1,5 +1,5 @@
 <template>
-  <div class="details">
+  <div class="details" v-title :data-title="gameInfo.gameName + ' - ' + 'Play' + ' ' + gameInfo.gameName + ' Online at ah5game.com'">
     <div class="main-center">
       <div class="main-game">
         <div class="game-part">
@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="game-bar">
-            <div class="bar-app-icon"><img :src="gameInfo.iconUrl" alt=""></div>
+            <div class="bar-app-icon"><img :src="gameInfo.iconUrl" alt=""><span>{{ gameInfo.gameName }}</span></div>
             <div class="bar-btns">
               <div class="download" v-if="$store.state.deferredPromptType" @click="addToDesktop"><span>Add to Desktop</span></div>
               <div class="play-tag" @click="getGameType1(gameInfo.gameType)"><span>Play {{ gameInfo.gameType }} Games</span></div>
@@ -88,7 +88,7 @@
 
 <script>
 import Bottom from '@/components/HomeIndex/Bottom';
-import { getGameList, determinePcOrMove, shuffle, getGameType } from '@/utils/utils.js'
+import { getGameList, determinePcOrMove, shuffle, getGameType, setMeta } from '@/utils/utils.js'
 export default {
   name: "detailsIndex",
   components: {
@@ -262,6 +262,7 @@ export default {
           this.intercept = newArr
           this.gameList = shuffleArr
 
+          setMeta(`${gameInfo.gameName},${gameInfo.gameName} Online,${gameInfo.gameName} for free`,`${gameInfo.gameName} is a ${gameInfo.gameType} Games`)
           this.manifestIcon(gameInfo)
         } else {
           this.$message.error('数据加载失败')
@@ -640,15 +641,20 @@ export default {
         display: flex;
         justify-content: space-between;
         .bar-app-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 8px;
-          overflow: hidden;
           margin-top: 6px;
           img{
-            width: 100%;
-            height: 100%;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            overflow: hidden;
             background: white;
+            vertical-align: middle;
+          }
+          span{
+            font-size: 16px;
+            color: white;
+            margin-left: 8px;
+            line-height: 45px;
           }
         }
         .bar-btns{

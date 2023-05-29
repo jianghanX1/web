@@ -1,5 +1,5 @@
 <template>
-  <div class="big">
+  <div class="big" v-title data-title="AH5 GAMES">
     <div>
       <Content></Content>
       <Bottom />

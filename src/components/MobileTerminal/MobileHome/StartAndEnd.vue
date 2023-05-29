@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="nav-bar">
-      <div @click="game">AH5 GAMES</div>
+    <div class="nav-bar" :style="bottomHide == false ? 'position: relative' : null">
+      <div><a :href="'/#/M/homeIndex'">AH5 GAMES</a></div>
     </div>
     <slot></slot>
     <div class="end" v-if="bottomHide == false ? false : true">
@@ -25,9 +25,9 @@ export default {
   },
   methods: {
     game() {
-      this.$router.push({
-        path: '/M/homeIndex'
-      },()=>{})
+      // this.$router.push({
+      //   path: '/M/homeIndex'
+      // },()=>{})
     },
     privacyClick() {
       let pathInfo = this.$router.resolve({
@@ -67,6 +67,10 @@ export default {
     line-height: 2.8125rem;
     color: #ffffff;
     font-weight: bold;
+    a{
+      text-decoration: none;
+      color: #ffffff;
+    }
   }
 }
 .end{
