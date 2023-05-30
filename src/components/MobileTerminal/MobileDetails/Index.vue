@@ -48,7 +48,8 @@
         <div class="iframe-box">
           <iframe id="gameIframe" :src="playUrl" width="100%" height="100%"></iframe>
         </div>
-        <div class="iframe-back" @click="backClick"><i class="el-icon-arrow-left"></i></div>
+        <div class="iframe-back" @click="backClick"><img :src="goBack" alt=""></div>
+        <a class="tap-game" @click="detailsClick()" v-for="(item,index) in tapGameList" :key="index" :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img class="img-tap-game" :src="item.iconUrl" alt=""></a>
       </div>
       <div class="app-promote">
         <div class="promote-list">
@@ -57,11 +58,13 @@
       </div>
     </div>
     <div class="is-top" :style="isTop ? {display: 'block'} : {display: 'none'}" @click="isTopClick">
-      <i class="el-icon-top"></i>
+      <img :src="topping" alt="">
     </div>
   </div>
 </template>
 <script>
+import goBack from '@/assets/goBack.png';
+import topping from '@/assets/topping.png';
 import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
 import {getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType, setMeta} from "@/utils/utils";
@@ -73,12 +76,16 @@ export default {
   },
   data() {
     return {
+      tapGameList: [], // 闪标列表
+      goBack: goBack,
+      topping: topping,
       gameName: '', // 游戏名称
       iconUrl: '', // 游戏icon
       description: '', // 游戏简介
       playUrl: '', // 游戏url
       typeList: [], // 游戏分类
       gameTypeList: [], // 游戏列表
+      allGameList: [], // 全部游戏列表
       gameShuffleList: [], // 随机列表
       playValue: false,
       playValue1: false,
@@ -149,11 +156,7 @@ export default {
         const { game_type } = dataObj || {}
         if (code == 1) {
           this.typeList = game_type
-          game_type.map((item)=>{
-            if (item.name == gameType) {
-              this.getGameTypeList(item.code)
-            }
-          })
+          this.getGameTypeList(gameType)
         } else {
           this.playValue1= false
           this.$message.error('获取游戏类别失败')
@@ -167,13 +170,20 @@ export default {
     // 获取游戏列表
     getGameTypeList(gameType) {
       // 获取游戏列表
-      getGameList(gameType).then((res)=>{
+      getGameList().then((res)=>{
         console.log(res);
         const { data } = res || {}
         const { code, data:dataObj } = data || {}
         if (code == 1) {
           this.playValue1= false
-          this.gameTypeList = dataObj || []
+          let arr = []
+          dataObj && dataObj.map((item)=>{
+            if (item.gameType == gameType) {
+              arr.push(item)
+            }
+          })
+          this.gameTypeList = arr || []
+          this.allGameList = dataObj || []
         } else {
           this.$message.error('数据加载失败')
         }
@@ -203,19 +213,29 @@ export default {
 
       this.playValue = true
       let arr = []
-      this.gameTypeList.map((item)=>{
+      this.allGameList.splice(0,30).map((item)=>{
         arr.push(item)
       })
       this.gameShuffleList = arr.splice(0,5)
+      this.tapGameList = arr.splice(0,1)
       clearInterval(this.timer)
       this.timer = setInterval(()=>{
         let newArr = []
-        this.gameTypeList.map((item)=>{
+        this.allGameList.map((item)=>{
           newArr.push(item)
         })
         let shuffleArr = shuffle(newArr) || []
         this.gameShuffleList = shuffleArr.splice(0,5)
       },10000)
+      clearInterval(this.timer2)
+      this.timer2 = setInterval(()=>{
+        let newArr = []
+        this.allGameList.map((item)=>{
+          newArr.push(item)
+        })
+        let shuffleArr = shuffle(newArr) || []
+        this.tapGameList = shuffleArr.splice(0,1)
+      },6000)
     },
     // 返回
     backClick() {
@@ -477,12 +497,16 @@ export default {
   right: 0.625rem;
   box-shadow: 0.125rem 0 0.3125rem rgb(0 0 0/30%);
   border-radius: 50%;
-  background: #ffffff;
+  //background: #ffffff;
   z-index: 3;
   text-align: center;
   /deep/.el-icon-top{
     font-size: 1.5rem;
     line-height: 2.5rem;
+  }
+  img{
+    width: 100%;
+    height: 100%;
   }
 }
 @media screen and (orientation: portrait){
@@ -495,18 +519,49 @@ export default {
       position: absolute;
       left: 0;
       top: 1.125rem;
-      box-shadow: 0 0.125rem 0 0.0625rem rgb(52 126 223);
+      //box-shadow: 0 0.125rem 0 0.0625rem rgb(52 126 223);
       border-radius: 0 1.125rem 1.125rem 0;
       overflow: hidden;
       width: 3.375rem;
       height: 2.1875rem;
-      background-color: #589df7;
+      //background-color: #589df7;
       text-align: center;
       /deep/ .el-icon-arrow-left{
         font-size: 2rem;
         color: #ffffff;
         line-height: 2.1875rem;
       }
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .tap-game{
+      .img-tap-game{
+        left: 0;
+        z-index: 110;
+        top: 20%;
+        height: 50px;
+        width: 50px;
+        position: fixed;
+        -webkit-border-radius: 25px;
+        border-radius: 25px;
+        opacity: .1;
+        overflow: hidden;
+        animation-name: breath;
+        animation-duration: 1200ms;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: breath;
+        -webkit-animation-duration: 1200ms;
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-animation-iteration-count: infinite;
+      }
+    }
+    @keyframes breath {
+      0%  {opacity: .1;}
+      50% {opacity: 1;}
+      100% {opacity: .1;}
     }
   }
   .app-promote {
@@ -552,17 +607,48 @@ export default {
       position: absolute;
       left: 0;
       top: 0.633803rem;
-      box-shadow: 0 0.0714rem 0 0.0357rem rgb(52 126 223);
+      //box-shadow: 0 0.0714rem 0 0.0357rem rgb(52 126 223);
       border-radius: 0 0.6429rem 0.6429rem 0;
       overflow: hidden;
       width: 1.9286rem;
       height: 1.25rem;
-      background-color: #589df7;
+      //background-color: #589df7;
       /deep/ .el-icon-arrow-left{
         font-size: 1rem;
         color: #ffffff;
         line-height: 1rem;
       }
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .tap-game{
+      .img-tap-game{
+        left: 2.171831rem;
+        z-index: 110;
+        top: 2.333803rem;
+        height: 50px;
+        width: 50px;
+        position: fixed;
+        -webkit-border-radius: 25px;
+        border-radius: 25px;
+        opacity: .1;
+        overflow: hidden;
+        animation-name: breath;
+        animation-duration: 1200ms;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: breath;
+        -webkit-animation-duration: 1200ms;
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-animation-iteration-count: infinite;
+      }
+    }
+    @keyframes breath {
+      0%  {opacity: .1;}
+      50% {opacity: 1;}
+      100% {opacity: .1;}
     }
   }
   .app-promote {
