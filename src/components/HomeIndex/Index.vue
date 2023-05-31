@@ -1,31 +1,41 @@
 <template>
-  <div class="big" v-title data-title="AH5 GAMES">
-    <div>
-      <Content></Content>
-      <Bottom />
-    </div>
-    <div class="recent-game">
-      <div class="title">Recent game</div>
-      <div class="content">
-        <div class="item" v-for="(item,index) in recentGameList" :key="index" @click="iconClick(item)"><img v-lazy="item.iconUrl" alt=""></div>
+  <div id="homeId">
+    <Navigation></Navigation>
+    <div class="big" v-title data-title="AH5 GAMES">
+      <div>
+        <Content></Content>
+        <Bottom />
+      </div>
+      <div class="recent-game">
+        <div class="title">Recent game</div>
+        <div class="content">
+          <div class="item" v-for="(item,index) in recentGameList" :key="index" @click="iconClick(item)"><img v-lazy="item.iconUrl" alt=""></div>
+        </div>
       </div>
     </div>
+    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
+import Navigation from '../Navigation';
+import BottomNav from '../BottomNav';
 import Content from '@/components/HomeIndex/Content';
 import Bottom from '@/components/HomeIndex/Bottom';
-import { getGameList, determinePcOrMove } from '@/utils/utils.js'
+import {getGameList, determinePcOrMove, shuffle} from '@/utils/utils.js'
 export default {
   name: "HomeIndex",
   components: {
     Content,
-    Bottom
+    Bottom,
+    Navigation,
+    BottomNav
   },
   data() {
     return {
-      recentGameList: []
+      recentGameList: [],
+      logoutCount: 0, // 长时间未操作
+      timerDate: null, // 定时器
     }
   },
   created() {
@@ -45,14 +55,50 @@ export default {
         const { data } = res || {}
         const { code, data:dataObj } = data || {}
         if (code == 1) {
+          let allGameList = []
+          dataObj && dataObj.map((item)=>{
+            allGameList.push(item)
+          })
+          clearInterval(this.timerDate)
+          this.timer(allGameList)
           let arr = dataObj.splice(0,4)
           this.recentGameList = arr
+          // 监听鼠标
+          document.getElementById('homeId').onmousedown = () => {
+            this.logoutCount = 0
+            this.timer(allGameList)
+          }
+          // 监听键盘
+          document.getElementById('homeId').onkeydown = () => {
+            this.logoutCount = 0
+            this.timer(allGameList)
+          }
+          console.log(document.getElementById('homeId'));
+          // 监听Scroll
+          document.getElementById('homeId').onscroll = () => {
+            this.logoutCount = 0
+            this.timer(allGameList)
+          }
         } else {
           this.$message.error('数据加载失败')
         }
       }).catch((err)=>{
         console.log(err);
       })
+    },
+    timer(allGameList) {
+      let arr = []
+      allGameList && allGameList.map((item)=>{
+        arr.push(item)
+      })
+      let newArr = shuffle(arr.splice(0,30))
+      clearInterval(this.timerDate)
+      this.timerDate = setInterval(()=>{
+        this.logoutCount++
+        if (this.logoutCount >= 10) {
+          window.location.href = '/#/P/details?gameId=' + newArr[0].gameId
+        }
+      },1000)
     },
     // 点击跳转详情
     iconClick(item) {
@@ -63,16 +109,23 @@ export default {
         }
       },()=>{})
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timerDate);
   }
 }
 </script>
 
 <style lang="less" scoped>
+#homeId{
+  height: 100vh;
+  overflow-y: auto;
+}
 .big{
   display: flex;
   min-width: 730px;
-  height: calc(100vh - 85px);
-  overflow-y: auto;
+  //height: calc(100vh - 85px);
+  //overflow-y: auto;
 }
 @media screen and (max-width: 840px){
   .recent-game {

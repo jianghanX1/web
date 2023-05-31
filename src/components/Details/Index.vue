@@ -1,98 +1,104 @@
 <template>
-  <div class="details" v-title :data-title="gameInfo.gameName + ' - ' + 'Play' + ' ' + gameInfo.gameName + ' Online at ah5game.com'">
-    <div class="main-center">
-      <div class="main-game">
-        <div class="game-part">
-          <div class="game-container" :style="full">
-            <iframe :src="gameInfo.playUrl ? gameInfo.playUrl : null" width="100%" height="100%" id="iframe"></iframe>
-            <div class="close" :style="closeStyle" @click="closeClick"><i class="el-icon-close" /></div>
-            <div class="flex-games" v-show="isBlock" :style="leftHideStyle">
-              <div class="btns">
-                <a href="javascript: void(0)" class="btn-left" @click="leftClick"><i class="el-icon-arrow-left" v-show="leftBtnType"></i><i class="el-icon-arrow-right" v-show="!leftBtnType"></i></a>
-                <a href="javascript: void(0)" class="btn-top" v-show="topBtnType" @click="topClick"><i class="el-icon-arrow-up"></i></a>
-                <a href="javascript: void(0)" class="btn-bottom" v-show="bottomBtnType" @click="bottomClick"><i class="el-icon-arrow-down"></i></a>
-              </div>
-              <div class="game-warp">
-                <div class="game-list" :style="{transform: `translateY(${heightType}px)`}" id="game-list">
-                  <div class="app-item" v-for="(item,index) in theSame" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+  <div v-title :data-title="gameInfo.gameName + ' - ' + 'Play' + ' ' + gameInfo.gameName + ' Online at ah5game.com'">
+    <Navigation></Navigation>
+    <div class="details">
+      <div class="main-center">
+        <div class="main-game">
+          <div class="game-part">
+            <div class="game-container" :style="full">
+              <iframe :src="gameInfo.playUrl ? gameInfo.playUrl : null" width="100%" height="100%" id="iframe"></iframe>
+              <div class="close" :style="closeStyle" @click="closeClick"><i class="el-icon-close" /></div>
+              <div class="flex-games" v-show="isBlock" :style="leftHideStyle">
+                <div class="btns">
+                  <a href="javascript: void(0)" class="btn-left" @click="leftClick"><i class="el-icon-arrow-left" v-show="leftBtnType"></i><i class="el-icon-arrow-right" v-show="!leftBtnType"></i></a>
+                  <a href="javascript: void(0)" class="btn-top" v-show="topBtnType" @click="topClick"><i class="el-icon-arrow-up"></i></a>
+                  <a href="javascript: void(0)" class="btn-bottom" v-show="bottomBtnType" @click="bottomClick"><i class="el-icon-arrow-down"></i></a>
+                </div>
+                <div class="game-warp">
+                  <div class="game-list" :style="{transform: `translateY(${heightType}px)`}" id="game-list">
+                    <div class="app-item" v-for="(item,index) in theSame" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="game-bar">
+              <div class="bar-app-icon"><img :src="gameInfo.iconUrl" alt=""><span>{{ gameInfo.gameName }}</span></div>
+              <div class="bar-btns">
+                <div class="download" v-if="$store.state.deferredPromptType" @click="addToDesktop"><span>Add to Desktop</span></div>
+                <div class="play-tag" @click="getGameType1(gameInfo.gameType)"><span>Play {{ gameInfo.gameType }} Games</span></div>
+                <div class="full-btn" @click="amplifyClick"><i class="el-icon-rank"></i></div>
+              </div>
+            </div>
           </div>
-          <div class="game-bar">
-            <div class="bar-app-icon"><img :src="gameInfo.iconUrl" alt=""><span>{{ gameInfo.gameName }}</span></div>
-            <div class="bar-btns">
-              <div class="download" v-if="$store.state.deferredPromptType" @click="addToDesktop"><span>Add to Desktop</span></div>
-              <div class="play-tag" @click="getGameType1(gameInfo.gameType)"><span>Play {{ gameInfo.gameType }} Games</span></div>
-              <div class="full-btn" @click="amplifyClick"><i class="el-icon-rank"></i></div>
+          <div class="game-rec">
+            <div class="app-item" v-for="(item,index) in four" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+          </div>
+        </div>
+        <div class="main-waterfall">
+          <div class="recommend-banner">
+            <div class="app-item" v-for="(item,index) in five" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+          </div>
+          <div class="game-list" v-if="six.length">
+            <div class="app-item" v-for="(item,index) in six" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+            <div class="more-btn">
+              <div v-if="intercept.length" @click="loadMoreGames">Load More Games</div>
             </div>
           </div>
         </div>
-        <div class="game-rec">
-          <div class="app-item" v-for="(item,index) in four" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
-        </div>
+        <Bottom />
       </div>
-      <div class="main-waterfall">
-        <div class="recommend-banner">
-          <div class="app-item" v-for="(item,index) in five" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+      <div class="main-float">
+        <div class="float-ads">
+          <div class="ads-top">
+            <div class="ads-title"></div>
+            <div class="ads-container"></div>
+          </div>
+          <div class="ads-bottom" id="adsBottom">
+            <div class="ads-title"></div>
+            <div class="ads-container"></div>
+          </div>
         </div>
-        <div class="game-list" v-if="six.length">
-          <div class="app-item" v-for="(item,index) in six" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
-          <div class="more-btn">
-            <div v-if="intercept.length" @click="loadMoreGames">Load More Games</div>
+        <div class="float-games">
+          <div class="games-container">
+            <div class="title">{{ gameTypeList[0] }}</div>
+            <div class="game-warp">
+              <div class="game-list">
+                <div class="app-item" v-for="(item,index) in one" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+              </div>
+            </div>
+          </div>
+          <div class="games-container">
+            <div class="title">{{ gameTypeList[1] }}</div>
+            <div class="game-warp">
+              <div class="game-list">
+                <div class="app-item" v-for="(item,index) in two" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+              </div>
+            </div>
+          </div>
+          <div class="games-container" id="girlsGames">
+            <div class="title">{{ gameTypeList[2] }}</div>
+            <div class="game-warp">
+              <div class="game-list">
+                <div class="app-item" v-for="(item,index) in three" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <Bottom />
     </div>
-    <div class="main-float">
-      <div class="float-ads">
-        <div class="ads-top">
-          <div class="ads-title"></div>
-          <div class="ads-container"></div>
-        </div>
-        <div class="ads-bottom" id="adsBottom">
-          <div class="ads-title"></div>
-          <div class="ads-container"></div>
-        </div>
-      </div>
-      <div class="float-games">
-        <div class="games-container">
-          <div class="title">{{ gameTypeList[0] }}</div>
-          <div class="game-warp">
-            <div class="game-list">
-              <div class="app-item" v-for="(item,index) in one" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
-            </div>
-          </div>
-        </div>
-        <div class="games-container">
-          <div class="title">{{ gameTypeList[1] }}</div>
-          <div class="game-warp">
-            <div class="game-list">
-              <div class="app-item" v-for="(item,index) in two" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
-            </div>
-          </div>
-        </div>
-        <div class="games-container" id="girlsGames">
-          <div class="title">{{ gameTypeList[2] }}</div>
-          <div class="game-warp">
-            <div class="game-list">
-              <div class="app-item" v-for="(item,index) in three" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <BottomNav></BottomNav>
   </div>
 </template>
 
 <script>
+import Navigation from '../Navigation';
+import BottomNav from '../BottomNav';
 import Bottom from '@/components/HomeIndex/Bottom';
 import { getGameList, determinePcOrMove, shuffle, getGameType, setMeta } from '@/utils/utils.js'
 export default {
   name: "detailsIndex",
   components: {
-    Bottom
+    Bottom,Navigation,BottomNav
   },
   data() {
     return {

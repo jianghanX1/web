@@ -1,5 +1,5 @@
 <template>
-  <div v-title data-title="AH5 GAMES">
+  <div v-title data-title="AH5 GAMES" id="homeId">
     <StartAndEnd>
       <div>
         <TopBox :topGameList="topGameList"></TopBox>
@@ -29,11 +29,12 @@ import racing from '@/assets/08racing.jpg';
 import parkour from '@/assets/09parkour.jpg';
 import sand from '@/assets/093d.jpg';
 
-import { getGameList, determinePcOrMove, getGameType } from '@/utils/utils.js'
+import { getGameList, determinePcOrMove, getGameType, shuffle } from '@/utils/utils.js'
 export default {
   name: "mobileIndex",
   data() {
     return {
+      allGameList: [], // 全部游戏
       topGameList: [], // 移动端头部游戏列表
       appGameList: [], // 中间游戏列表
       gameTypeList: [], // 底部游戏类型
@@ -47,6 +48,8 @@ export default {
       racing,
       parkour,
       sand,
+      logoutCount: 0, // 长时间未操作
+      timerDate: null, // 定时器
     }
   },
   components: {
@@ -65,6 +68,12 @@ export default {
       const { data } = res || {}
       const { code, data:dataObj } = data || {}
       if (code == 1) {
+        let allGameList = []
+        dataObj && dataObj.map((item)=>{
+          allGameList.push(item)
+        })
+        clearInterval(this.timerDate)
+        this.timer(allGameList)
         let arr = dataObj || [] // 原数组
         this.topGameList = arr.splice(0,5) // 头部五条数据
         let newArr = [] // 新数组
@@ -74,6 +83,22 @@ export default {
         }
         console.log(newArr);
         this.appGameList = newArr
+
+        // 监听鼠标
+        document.getElementById('homeId').onmousemove = () => {
+          this.logoutCount = 0
+          this.timer(allGameList)
+        }
+        // 监听键盘
+        document.getElementById('homeId').onkeydown = () => {
+          this.logoutCount = 0
+          this.timer(allGameList)
+        }
+        // 监听Scroll
+        document.getElementById('homeId').onscroll = () => {
+          this.logoutCount = 0
+          this.timer(allGameList)
+        }
       }
     }).catch((err)=>{
       console.log(err);
@@ -103,9 +128,31 @@ export default {
       console.log(err);
     })
   },
+  methods: {
+    timer(allGameList) {
+      let arr = []
+      allGameList && allGameList.map((item)=>{
+        arr.push(item)
+      })
+      let newArr = shuffle(arr.splice(0,30))
+      clearInterval(this.timerDate)
+      this.timerDate = setInterval(()=>{
+        this.logoutCount++
+        if (this.logoutCount >= 10) {
+          window.location.href = '/#/M/details?gameId=' + newArr[0].gameId
+        }
+      },1000)
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.timerDate);
+  }
 }
 </script>
 
 <style scoped>
-
+#homeId{
+  height: 100vh;
+  overflow-y: auto;
+}
 </style>

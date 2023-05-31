@@ -27,7 +27,18 @@
           </div>
           <div></div>
         </div>
-        <div class="content-top">
+        <div class="adv" v-if="index === 0">
+          <h6 class="adv-title">Advertisement</h6>
+          <div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9846530703102193"
+                 data-ad-slot="3863460797"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+        <div class="content-top" style="margin-top: 0.5625rem">
           <div class="item" v-if="item[6] && item[6].iconUrl"><a :href="'/#/M/details?gameId='+item[6].gameId"><img v-lazy="item[6] && item[6].iconUrl" alt=""></a></div>
           <div class="item" v-if="item[7] && item[7].iconUrl"><a :href="'/#/M/details?gameId='+item[7].gameId"><img v-lazy="item[7] && item[7].iconUrl" alt=""></a></div>
           <div class="item" v-if="item[8] && item[8].iconUrl"><a :href="'/#/M/details?gameId='+item[8].gameId"><img v-lazy="item[8] && item[8].iconUrl" alt=""></a></div>
@@ -35,17 +46,6 @@
         <div class="content-bottom">
           <div class="item-box" v-if="item[9] && item[9].iconUrl"><div class="item"><a :href="'/#/M/details?gameId='+item[9].gameId"><img v-lazy="item[9] && item[9].iconUrl" alt=""></a></div></div>
           <div class="item-box" v-if="item[10] && item[10].iconUrl"><div class="item"><a :href="'/#/M/details?gameId='+item[10].gameId"><img v-lazy="item[10] && item[10].iconUrl" alt=""></a></div></div>
-        </div>
-      </div>
-      <div class="adv" v-if="index === 0">
-        <h6 class="adv-title">Advertisement</h6>
-        <div>
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-9846530703102193"
-               data-ad-slot="3863460797"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
         </div>
       </div>
     </div>
@@ -232,6 +232,7 @@ export default {
       font-size: .8125rem;
       color: #333;
       text-align: center;
+      margin: 0 -0.625rem;
     }
   }
 }
