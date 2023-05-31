@@ -8,6 +8,20 @@
         <BottomText></BottomText>
       </div>
     </StartAndEnd>
+    <div class="smegma" :style="bg" v-if="!smegmaHide">
+      <div class="btn" :style="btnBg" @click="smegmaHide = count <= 0 ? true : false">
+        {{ count == 0 ? countText : count }}
+      </div>
+      <div class="adv">
+        <ins class="adsbygoogle"
+             style="display:block;min-height: 300px"
+             data-ad-client="ca-pub-9846530703102193"
+             data-ad-slot="4612687250"
+             data-ad-format="true"
+             data-full-width-responsive="true"></ins>
+      </div>
+      <div class="desc"><img :src="wz" alt=""></div>
+    </div>
   </div>
 </template>
 
@@ -30,6 +44,9 @@ import parkour from '@/assets/09parkour.jpg';
 import sand from '@/assets/093d.jpg';
 
 import { getGameList, determinePcOrMove, getGameType, shuffle } from '@/utils/utils.js'
+import bgImg from '@/assets/advertisement/bg.jpg';
+import btnBg from '@/assets/advertisement/btn_anniu.png';
+import wz from '@/assets/advertisement/wz.png';
 export default {
   name: "mobileIndex",
   data() {
@@ -50,6 +67,21 @@ export default {
       sand,
       logoutCount: 0, // 长时间未操作
       timerDate: null, // 定时器
+      bg: {
+        backgroundImage: `url(${bgImg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%",
+      },
+      btnBg: {
+        backgroundImage: `url(${btnBg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%"
+      },
+      count: 5, // 倒计时按钮
+      countText: 'CLOSE', // 倒计时按钮
+      timerCountdown: null, // 倒计时
+      wz,
+      smegmaHide: false, // 隐藏蒙层
     }
   },
   components: {
@@ -63,6 +95,14 @@ export default {
     }
   },
   mounted() {
+    let enterType = sessionStorage.getItem('enterType')
+    if (enterType) {
+      this.smegmaHide = true
+    } else {
+      sessionStorage.setItem('enterType', '1')
+      this.smegmaHide = false
+    }
+    this.countdown()
     getGameList().then((res)=>{
       console.log(res);
       const { data } = res || {}
@@ -142,6 +182,15 @@ export default {
           window.location.href = '/#/M/details?gameId=' + newArr[0].gameId
         }
       },1000)
+    },
+    countdown() {
+      clearInterval(this.timerCountdown)
+      this.timerCountdown = setInterval(()=>{
+        this.count -= 1
+        if (this.count <= 0) {
+          clearInterval(this.timerCountdown)
+        }
+      },1000)
     }
   },
   beforeDestroy() {
@@ -150,9 +199,37 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 #homeId{
   height: 100vh;
   overflow-y: auto;
+  position: relative;
+  .smegma{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    .btn{
+      width: 10.3888rem;
+      height: 3.5rem;
+      margin: 42% auto 0;
+      text-align: center;
+      line-height: 3.3rem;
+      font-size: 2rem;
+      color: #874000;
+    }
+    .adv{
+      margin-top: 1rem;
+    }
+    .desc{
+      padding: 0.5rem 0.8rem;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
 </style>
