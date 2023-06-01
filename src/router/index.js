@@ -9,6 +9,7 @@ import MobileClassify from '@/components/MobileTerminal/MobileHome/MobileClassif
 import MobileDetails from '@/components/MobileTerminal/MobileDetails/Index'; // 移动端详情
 import Privacy from '@/views/Privacy';
 import ContactUs from '@/views/ContactUs';
+import NotFound from '@/views/NotFound';
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,15 @@ const routes = [
     path: '/contactUs',
     name: 'contactUs',
     component: ContactUs
+  },
+  {
+    path: '/NotFound',
+    name: 'NotFound',
+    component: NotFound
+  },
+  {
+    path: '*',
+    redirect: '/NotFound'
   },
 ]
 

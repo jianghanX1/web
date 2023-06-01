@@ -35,18 +35,20 @@ export default {
     return {
       recentGameList: [],
       logoutCount: 0, // 长时间未操作
-      timerDate: null, // 定时器
+      timerDatePC: null, // 定时器
     }
   },
   created() {
+
+  },
+  mounted() {
     if (determinePcOrMove() == 1) {
       this.$router.push({
         path: '/M/homeIndex'
       },()=>{})
+    } else {
+      this.getList()
     }
-  },
-  mounted() {
-    this.getList()
   },
   methods: {
     getList() {
@@ -59,7 +61,7 @@ export default {
           dataObj && dataObj.map((item)=>{
             allGameList.push(item)
           })
-          clearInterval(this.timerDate)
+          clearInterval(this.timerDatePC)
           this.timer(allGameList)
           let arr = dataObj.splice(0,4)
           this.recentGameList = arr
@@ -92,9 +94,10 @@ export default {
         arr.push(item)
       })
       let newArr = shuffle(arr.splice(0,30))
-      clearInterval(this.timerDate)
-      this.timerDate = setInterval(()=>{
+      clearInterval(this.timerDatePC)
+      this.timerDatePC = setInterval(()=>{
         this.logoutCount++
+        console.log(this.logoutCount);
         if (this.logoutCount >= 10) {
           window.location.href = '/#/P/details?gameId=' + newArr[0].gameId
         }
@@ -111,7 +114,9 @@ export default {
     }
   },
   beforeDestroy() {
-    clearInterval(this.timerDate);
+    clearInterval(this.timerDatePC);
+    this.timerDatePC = null
+    console.log(111,'sdfsdffsfsfddsf');
   }
 }
 </script>

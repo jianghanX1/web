@@ -9,7 +9,7 @@
       </div>
     </StartAndEnd>
     <div class="smegma" :style="bg" v-if="!smegmaHide">
-      <div class="btn" :style="btnBg" @click="smegmaHide = count <= 0 ? true : false">
+      <div class="btn" :style="btnBg" @click="smegmaHideClick(count == 0 ? true : false)">
         {{ count == 0 ? countText : count }}
       </div>
       <div class="adv">
@@ -87,68 +87,68 @@ export default {
   components: {
     StartAndEnd,TopBox,AppList,BottomList,BottomText
   },
-  created() {
+
+  mounted() {
     if (determinePcOrMove() == 2) {
       this.$router.push({
         path: '/P/homeIndex'
       },()=>{})
-    }
-  },
-  mounted() {
-    let enterType = sessionStorage.getItem('enterType')
-    if (enterType) {
-      this.smegmaHide = true
     } else {
-      sessionStorage.setItem('enterType', '1')
-      this.smegmaHide = false
-    }
-    this.countdown()
-    getGameList().then((res)=>{
-      console.log(res);
-      const { data } = res || {}
-      const { code, data:dataObj } = data || {}
-      if (code == 1) {
-        let allGameList = []
-        dataObj && dataObj.map((item)=>{
-          allGameList.push(item)
-        })
-        clearInterval(this.timerDate)
-        this.timer(allGameList)
-        let arr = dataObj || [] // 原数组
-        this.topGameList = arr.splice(0,5) // 头部五条数据
-        let newArr = [] // 新数组
-        let num = Math.ceil(arr.length / 11)
-        for ( let i = 1; i <= num; i++ ) {
-          newArr[i - 1] = arr.splice(0,11)
-        }
-        console.log(newArr);
-        this.appGameList = newArr
-
-        // 监听鼠标
-        document.getElementById('homeId').onmousemove = () => {
-          this.logoutCount = 0
-          this.timer(allGameList)
-        }
-        // 监听键盘
-        document.getElementById('homeId').onkeydown = () => {
-          this.logoutCount = 0
-          this.timer(allGameList)
-        }
-        // 监听Scroll
-        document.getElementById('homeId').onscroll = () => {
-          this.logoutCount = 0
-          this.timer(allGameList)
-        }
+      let enterType = sessionStorage.getItem('enterType')
+      if (enterType) {
+        this.smegmaHide = true
+      } else {
+        sessionStorage.setItem('enterType', '1')
+        this.smegmaHide = false
+        this.countdown()
       }
-    }).catch((err)=>{
-      console.log(err);
-    })
-    getGameType().then((res)=>{
-      const { data } = res || {}
-      const { code, data:dataObj } = data || {}
-      const { game_type } = dataObj || {}
-      if (code == 1) {
-        game_type && game_type.map(()=>{
+      getGameList().then((res)=>{
+        console.log(res);
+        const { data } = res || {}
+        const { code, data:dataObj } = data || {}
+        if (code == 1) {
+          let allGameList = []
+          dataObj && dataObj.map((item)=>{
+            allGameList.push(item)
+          })
+          this.allGameList = allGameList
+          clearInterval(this.timerDate)
+          this.timer(allGameList)
+          let arr = dataObj || [] // 原数组
+          this.topGameList = arr.splice(0,5) // 头部五条数据
+          let newArr = [] // 新数组
+          let num = Math.ceil(arr.length / 11)
+          for ( let i = 1; i <= num; i++ ) {
+            newArr[i - 1] = arr.splice(0,11)
+          }
+          console.log(newArr);
+          this.appGameList = newArr
+
+          // 监听鼠标
+          document.getElementById('homeId').onmousemove = () => {
+            this.logoutCount = 0
+            this.timer(allGameList)
+          }
+          // 监听键盘
+          document.getElementById('homeId').onkeydown = () => {
+            this.logoutCount = 0
+            this.timer(allGameList)
+          }
+          // 监听Scroll
+          document.getElementById('homeId').onscroll = () => {
+            this.logoutCount = 0
+            this.timer(allGameList)
+          }
+        }
+      }).catch((err)=>{
+        console.log(err);
+      })
+      getGameType().then((res)=>{
+        const { data } = res || {}
+        const { code, data:dataObj } = data || {}
+        const { game_type } = dataObj || {}
+        if (code == 1) {
+          game_type && game_type.map(()=>{
             game_type[0].iconUrl = this.shooting
             game_type[1].iconUrl = this.car
             game_type[2].iconUrl = this.ball
@@ -159,34 +159,45 @@ export default {
             game_type[7].iconUrl = this.racing
             game_type[8].iconUrl = this.parkour
             game_type[9].iconUrl = this.sand
-        })
-        this.gameTypeList = game_type
-      } else {
-        this.$message.error('获取游戏类别失败')
-      }
-    }).catch((err)=>{
-      console.log(err);
-    })
+          })
+          this.gameTypeList = game_type
+        } else {
+          this.$message.error('获取游戏类别失败')
+        }
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
   },
   methods: {
+    smegmaHideClick(type) {
+      this.smegmaHide = type
+      if (type) {
+        this.timer(this.allGameList)
+      }
+    },
     timer(allGameList) {
-      let arr = []
-      allGameList && allGameList.map((item)=>{
-        arr.push(item)
-      })
-      let newArr = shuffle(arr.splice(0,30))
-      clearInterval(this.timerDate)
-      this.timerDate = setInterval(()=>{
-        this.logoutCount++
-        if (this.logoutCount >= 10) {
-          window.location.href = '/#/M/details?gameId=' + newArr[0].gameId
-        }
-      },1000)
+      if (this.smegmaHide) {
+        let arr = []
+        allGameList && allGameList.map((item)=>{
+          arr.push(item)
+        })
+        let newArr = shuffle(arr.splice(0,30))
+        clearInterval(this.timerDate)
+        this.timerDate = setInterval(()=>{
+          this.logoutCount++
+          console.log(this.logoutCount);
+          if (this.logoutCount >= 10) {
+            window.location.href = '/#/M/details?gameId=' + newArr[0].gameId
+          }
+        },1000)
+      }
     },
     countdown() {
       clearInterval(this.timerCountdown)
       this.timerCountdown = setInterval(()=>{
         this.count -= 1
+        console.log(this.count);
         if (this.count <= 0) {
           clearInterval(this.timerCountdown)
         }
@@ -195,6 +206,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timerDate);
+    clearInterval(this.timerCountdown)
   }
 }
 </script>
