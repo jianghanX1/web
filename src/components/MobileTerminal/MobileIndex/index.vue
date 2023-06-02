@@ -12,13 +12,15 @@
       <div class="btn" :style="btnBg" @click="smegmaHideClick(count == 0 ? true : false)">
         {{ count == 0 ? countText : count }}
       </div>
-      <div class="adv">
-        <ins class="adsbygoogle"
-             style="display:block;min-height: 300px"
-             data-ad-client="ca-pub-9846530703102193"
-             data-ad-slot="4612687250"
-             data-ad-format="true"
-             data-full-width-responsive="true"></ins>
+      <div :style="advBg">
+        <div class="adv">
+          <ins class="adsbygoogle"
+               style="display:block;min-height: 300px"
+               data-ad-client="ca-pub-9846530703102193"
+               data-ad-slot="4612687250"
+               data-ad-format="true"
+               data-full-width-responsive="true"></ins>
+        </div>
       </div>
       <div class="desc"><img :src="wz" alt=""></div>
     </div>
@@ -47,6 +49,7 @@ import { getGameList, determinePcOrMove, getGameType, shuffle } from '@/utils/ut
 import bgImg from '@/assets/advertisement/bg.jpg';
 import btnBg from '@/assets/advertisement/btn_anniu.png';
 import wz from '@/assets/advertisement/wz.png';
+import bg2 from '@/assets/advertisement/bg2.png';
 export default {
   name: "mobileIndex",
   data() {
@@ -67,6 +70,12 @@ export default {
       sand,
       logoutCount: 0, // 长时间未操作
       timerDate: null, // 定时器
+      advBg: {
+        backgroundImage: `url(${bg2})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%",
+        minHeight: '300px'
+      },
       bg: {
         backgroundImage: `url(${bgImg})`,
         backgroundRepeat: "no-repeat",
@@ -232,7 +241,7 @@ export default {
       font-size: 2rem;
       color: #874000;
     }
-    .adv{
+    .adv-bg{
       margin-top: 1rem;
     }
     .desc{
