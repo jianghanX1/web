@@ -45,9 +45,10 @@ export default {
   },
   data() {
     return {
-      determinePcOrMove: determinePcOrMove(),
+      determinePcOrMove: determinePcOrMove() || 1,
       contact_us: ["contact_us"],
       contact_us_M: ["contact_us_M"],
+
       formData: {
         name: '',
         email: '',
@@ -166,7 +167,6 @@ export default {
        * @return {[String]}     [随机颜色]
        */
       function ranColor(min, max) {
-
         var r = ranNum(min, max);
 
         var g = ranNum(min, max);
