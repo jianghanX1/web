@@ -76,6 +76,7 @@ export function recentGame (element) {
     recentGame.map((item,index)=>{
       if (item.gameId == element.gameId) {
         recentGame.splice(index,1)
+        item.filterStatus = 1
         recentGame.unshift(item)
       }
     })
