@@ -73,6 +73,13 @@ export function recentGame (element) {
   let recentGame = JSON.parse(localStorage.getItem('recentGame'))
   let index = recentGame.findIndex((item) => item.filterStatus == 0)
   if (recentGame.findIndex((item) => item.gameId == element.gameId) != -1) {
+    recentGame.map((item,index)=>{
+      if (item.gameId == element.gameId) {
+        recentGame.splice(index,1)
+        recentGame.unshift(item)
+      }
+    })
+    localStorage.setItem('recentGame',JSON.stringify(recentGame))
     return
   }
   if (index == -1) {

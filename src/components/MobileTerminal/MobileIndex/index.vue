@@ -197,6 +197,7 @@ export default {
     smegmaHideClick(type) {
       this.smegmaHide = type
       if (type) {
+        clearInterval(this.timerCountdown2)
         this.timer(this.allGameList)
       }
     },
@@ -225,6 +226,7 @@ export default {
         console.log(this.count);
         if (this.count <= 0) {
           clearInterval(this.timerCountdown)
+          clearInterval(this.timerCountdown2)
           this.countdown2()
         }
       },1000)
