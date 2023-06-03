@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { getGameList } from '@/utils/utils.js'
+import { getGameList, recentGame } from '@/utils/utils.js'
 export default {
   name: "contentIndex",
   data() {
@@ -55,6 +55,7 @@ export default {
     },
     // 点击跳转详情
     iconClick(item) {
+      recentGame(item)
       this.$router.push({
         path: '/P/details',
         query: {

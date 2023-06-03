@@ -1,12 +1,13 @@
 <template>
   <div class="top-box">
-    <div class="item" v-for="(item,index) in topGameList" :key="index">
+    <div class="item" v-for="(item,index) in topGameList" :key="index" @click="detailsClick(item)">
       <a :href="'/#/M/details?gameId='+item.gameId"><img v-lazy="item.iconUrl" alt=""></a>
     </div>
   </div>
 </template>
 
 <script>
+import { recentGame } from '@/utils/utils.js';
 export default {
   name: "TopBox",
   props: ['topGameList'],
@@ -16,14 +17,15 @@ export default {
     }
   },
   methods: {
-    // detailsClick(item) {
-    //   this.$router.push({
-    //     path: '/M/details',
-    //     query: {
-    //       gameId: item.gameId
-    //     }
-    //   },()=>{})
-    // }
+    detailsClick(item) {
+      recentGame(item)
+      // this.$router.push({
+      //   path: '/M/details',
+      //   query: {
+      //     gameId: item.gameId
+      //   }
+      // },()=>{})
+    }
   }
 }
 </script>

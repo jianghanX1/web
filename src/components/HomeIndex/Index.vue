@@ -22,7 +22,7 @@ import Navigation from '../Navigation';
 import BottomNav from '../BottomNav';
 import Content from '@/components/HomeIndex/Content';
 import Bottom from '@/components/HomeIndex/Bottom';
-import {getGameList, determinePcOrMove, shuffle} from '@/utils/utils.js'
+import {getGameList, determinePcOrMove, shuffle, recentGame} from '@/utils/utils.js'
 export default {
   name: "HomeIndex",
   components: {
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     getList() {
-      getGameList(1).then((res)=>{
+      getGameList().then((res)=>{
         console.log(res);
         const { data } = res || {}
         const { code, data:dataObj } = data || {}
@@ -63,8 +63,34 @@ export default {
           })
           clearInterval(this.timerDatePC)
           this.timer(allGameList)
-          let arr = dataObj.splice(0,4)
-          this.recentGameList = arr
+          let arr = dataObj || [] // 原数组
+          let recentGame = []
+          let recentGamePc = []
+          if (localStorage.getItem('recentGame')) {
+            JSON.parse(localStorage.getItem('recentGame')) && JSON.parse(localStorage.getItem('recentGame')).map((item)=>{
+              if (recentGamePc.length < 4) {
+                recentGamePc.push(item)
+              }
+            })
+            this.recentGameList = recentGamePc
+          } else {
+            // 移动端展示五条
+            arr.map((item)=>{
+              if (recentGame.length < 5) {
+                item.filterStatus = 0 // 筛选状态用来判断点击游戏时替换数组中的位置元素
+                recentGame.push(item)
+              }
+            })
+
+            // pc端展示四条
+            recentGame && recentGame.map((item)=>{
+              if (recentGamePc.length < 4) {
+                recentGamePc.push(item)
+              }
+            })
+            this.recentGameList = recentGamePc
+            localStorage.setItem('recentGame',JSON.stringify(recentGame))
+          }
           // 监听鼠标
           document.getElementById('homeId').onmousedown = () => {
             this.logoutCount = 0
@@ -99,6 +125,7 @@ export default {
         this.logoutCount++
         console.log(this.logoutCount);
         if (this.logoutCount >= 10) {
+          recentGame(newArr[0])
           window.location.href = '/#/P/details?gameId=' + newArr[0].gameId
         }
       },1000)

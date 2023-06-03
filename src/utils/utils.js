@@ -67,3 +67,26 @@ export function setMeta (key,des){
   document.querySelector("meta[name='keywords']").setAttribute('content', key);
   document.querySelector("meta[name='description']").setAttribute('content', des);
 }
+
+// 常玩游戏列表替换
+export function recentGame (element) {
+  let recentGame = JSON.parse(localStorage.getItem('recentGame'))
+  let index = recentGame.findIndex((item) => item.filterStatus == 0)
+  if (recentGame.findIndex((item) => item.gameId == element.gameId) != -1) {
+    return
+  }
+  if (index == -1) {
+    recentGame.map((item)=>{
+      item.filterStatus = 0
+    })
+    recentGame[0] = {...element,filterStatus: 1}
+    localStorage.setItem('recentGame',JSON.stringify(recentGame))
+  } else {
+    recentGame.map((item, idx)=>{
+      if (index == idx) {
+        recentGame[idx] = {...element,filterStatus: 1}
+      }
+    })
+    localStorage.setItem('recentGame',JSON.stringify(recentGame))
+  }
+}

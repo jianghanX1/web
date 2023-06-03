@@ -1,12 +1,13 @@
 <template>
   <div class="class-box" :style="styleType ? {marginTop: 0} : null">
     <div class="class-list" :style="styleType ? {padding: 0} : null">
-      <div class="class-item" v-for="(item,index) in gameTypeList" :key="index"><a :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img v-lazy="item.iconUrl" alt=""></a></div>
+      <div class="class-item" @click="detailsClick(item)" v-for="(item,index) in gameTypeList" :key="index"><a :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img v-lazy="item.iconUrl" alt=""></a></div>
     </div>
   </div>
 </template>
 
 <script>
+import { recentGame } from '@/utils/utils.js';
 export default {
   name: "ClassList",
   props: ["styleType",'gameTypeList'],
@@ -16,14 +17,15 @@ export default {
     }
   },
   methods: {
-    // detailsClick(item) {
-    //   this.$router.push({
-    //     path: '/M/details',
-    //     query: {
-    //       gameId: item.gameId
-    //     }
-    //   },()=>{})
-    // }
+    detailsClick(item) {
+      recentGame(item)
+      // this.$router.push({
+      //   path: '/M/details',
+      //   query: {
+      //     gameId: item.gameId
+      //   }
+      // },()=>{})
+    }
   }
 }
 </script>

@@ -49,11 +49,11 @@
           <iframe id="gameIframe" :src="playUrl" width="100%" height="100%"></iframe>
         </div>
         <div class="iframe-back" @click="backClick"><img :src="goBack" alt=""></div>
-        <a class="tap-game" @click="detailsClick()" v-for="(item,index) in tapGameList" :key="index" :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img class="img-tap-game" :src="item.iconUrl" alt=""></a>
+        <a class="tap-game" @click="detailsClick(item)" v-for="(item,index) in tapGameList" :key="index" :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img class="img-tap-game" :src="item.iconUrl" alt=""></a>
       </div>
       <div class="app-promote">
         <div class="promote-list">
-          <div class="item" @click="detailsClick()" v-for="(item,index) in gameShuffleList" :key="index"><a :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img :src="item.iconUrl" alt=""></a></div>
+          <div class="item" @click="detailsClick(item)" v-for="(item,index) in gameShuffleList" :key="index"><a :href="'/#/M/details?gameId='+item.gameId+'&jiaocha=1'"><img :src="item.iconUrl" alt=""></a></div>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ import goBack from '@/assets/goBack.png';
 import topping from '@/assets/topping.png';
 import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
-import {getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType, setMeta} from "@/utils/utils";
+import {getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType, setMeta, recentGame} from "@/utils/utils";
 import { show_newAfg_preroll } from '../../../../ah5sdk';
 export default {
   name: "mobileDetailsIndex",
@@ -243,7 +243,8 @@ export default {
       clearInterval(this.timer)
     },
     // 跳转详情
-    detailsClick() {
+    detailsClick(item) {
+      recentGame(item)
       // this.$router.push({
       //   path: '/M/details',
       //   query: {

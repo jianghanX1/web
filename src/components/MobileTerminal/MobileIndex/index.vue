@@ -45,7 +45,7 @@ import racing from '@/assets/08racing.jpg';
 import parkour from '@/assets/09parkour.jpg';
 import sand from '@/assets/093d.jpg';
 
-import { getGameList, determinePcOrMove, getGameType, shuffle } from '@/utils/utils.js'
+import {getGameList, determinePcOrMove, getGameType, shuffle, recentGame} from '@/utils/utils.js'
 import bgImg from '@/assets/advertisement/bg.jpg';
 import btnBg from '@/assets/advertisement/btn_anniu.png';
 import wz from '@/assets/advertisement/wz.png';
@@ -89,6 +89,8 @@ export default {
       count: 5, // 倒计时按钮
       countText: 'CLOSE', // 倒计时按钮
       timerCountdown: null, // 倒计时
+      count2: 5, // 倒计时按钮
+      timerCountdown2: null, // 倒计时
       wz,
       smegmaHide: false, // 隐藏蒙层
     }
@@ -124,7 +126,20 @@ export default {
           clearInterval(this.timerDate)
           this.timer(allGameList)
           let arr = dataObj || [] // 原数组
-          this.topGameList = arr.splice(0,5) // 头部五条数据
+          let recentGame = []
+          if (localStorage.getItem('recentGame')) {
+            this.topGameList = JSON.parse(localStorage.getItem('recentGame'))
+          } else {
+            arr.map((item)=>{
+              if (recentGame.length < 5) {
+                item.filterStatus = 0 // 筛选状态用来判断点击游戏时替换数组中的位置元素
+                recentGame.push(item)
+              }
+            })
+            this.topGameList = recentGame
+            localStorage.setItem('recentGame',JSON.stringify(recentGame))
+          }
+          // this.topGameList = arr.splice(0,5) // 头部五条数据
           let newArr = [] // 新数组
           let num = Math.ceil(arr.length / 11)
           for ( let i = 1; i <= num; i++ ) {
@@ -197,6 +212,7 @@ export default {
           this.logoutCount++
           console.log(this.logoutCount);
           if (this.logoutCount >= 10) {
+            recentGame(newArr[0])
             window.location.href = '/#/M/details?gameId=' + newArr[0].gameId
           }
         },1000)
@@ -209,6 +225,19 @@ export default {
         console.log(this.count);
         if (this.count <= 0) {
           clearInterval(this.timerCountdown)
+          this.countdown2()
+        }
+      },1000)
+    },
+    countdown2() {
+      // 倒计时结束后5s关闭推荐
+      clearInterval(this.timerCountdown2)
+      this.timerCountdown2 = setInterval(()=>{
+        this.count2 -= 1
+        console.log(this.count2);
+        if (this.count2 <= 0) {
+          clearInterval(this.timerCountdown2)
+          this.smegmaHideClick(true)
         }
       },1000)
     }

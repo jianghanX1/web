@@ -16,7 +16,7 @@
                 </div>
                 <div class="game-warp">
                   <div class="game-list" :style="{transform: `translateY(${heightType}px)`}" id="game-list">
-                    <div class="app-item" v-for="(item,index) in theSame" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+                    <div class="app-item" v-for="(item,index) in theSame" :key="index" @click="switchGame(item)"><img v-lazy="item.iconUrl" alt=""></div>
                   </div>
                 </div>
               </div>
@@ -31,15 +31,15 @@
             </div>
           </div>
           <div class="game-rec">
-            <div class="app-item" v-for="(item,index) in four" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+            <div class="app-item" v-for="(item,index) in four" :key="index" @click="switchGame(item)"><img v-lazy="item.iconUrl" alt=""></div>
           </div>
         </div>
         <div class="main-waterfall">
           <div class="recommend-banner">
-            <div class="app-item" v-for="(item,index) in five" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+            <div class="app-item" v-for="(item,index) in five" :key="index" @click="switchGame(item)"><img v-lazy="item.iconUrl" alt=""></div>
           </div>
           <div class="game-list" v-if="six.length">
-            <div class="app-item" v-for="(item,index) in six" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+            <div class="app-item" v-for="(item,index) in six" :key="index" @click="switchGame(item)"><img v-lazy="item.iconUrl" alt=""></div>
             <div class="more-btn">
               <div v-if="intercept.length" @click="loadMoreGames">Load More Games</div>
             </div>
@@ -63,7 +63,7 @@
             <div class="title">{{ gameTypeList[0] }}</div>
             <div class="game-warp">
               <div class="game-list">
-                <div class="app-item" v-for="(item,index) in one" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+                <div class="app-item" v-for="(item,index) in one" :key="index" @click="switchGame(item)"><img v-lazy="item.iconUrl" alt=""></div>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
             <div class="title">{{ gameTypeList[1] }}</div>
             <div class="game-warp">
               <div class="game-list">
-                <div class="app-item" v-for="(item,index) in two" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+                <div class="app-item" v-for="(item,index) in two" :key="index" @click="switchGame(item)"><img v-lazy="item.iconUrl" alt=""></div>
               </div>
             </div>
           </div>
@@ -79,7 +79,7 @@
             <div class="title">{{ gameTypeList[2] }}</div>
             <div class="game-warp">
               <div class="game-list">
-                <div class="app-item" v-for="(item,index) in three" :key="index" @click="switchGame(item.gameId)"><img v-lazy="item.iconUrl" alt=""></div>
+                <div class="app-item" v-for="(item,index) in three" :key="index" @click="switchGame(item)"><img v-lazy="item.iconUrl" alt=""></div>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@
 import Navigation from '../Navigation';
 import BottomNav from '../BottomNav';
 import Bottom from '@/components/HomeIndex/Bottom';
-import { getGameList, determinePcOrMove, shuffle, getGameType, setMeta } from '@/utils/utils.js'
+import { getGameList, determinePcOrMove, shuffle, getGameType, setMeta, recentGame } from '@/utils/utils.js'
 export default {
   name: "detailsIndex",
   components: {
@@ -318,11 +318,12 @@ export default {
       this.intercept = intercept
     },
     // 切换游戏
-    switchGame (gameId) {
+    switchGame (item) {
+      recentGame(item)
       this.$router.push({
         path: '/P/details',
         query: {
-          gameId
+          gameId: item.gameId
         }
       },()=>{})
     },
