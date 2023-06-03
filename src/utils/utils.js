@@ -90,9 +90,16 @@ export function recentGame (element) {
     recentGame[0] = {...element,filterStatus: 1}
     localStorage.setItem('recentGame',JSON.stringify(recentGame))
   } else {
-    recentGame.map((item, idx)=>{
-      if (index == idx) {
-        recentGame[idx] = {...element,filterStatus: 1}
+    let arr = []
+    recentGame.map((item)=>{
+      if (item.filterStatus == 0) {
+        arr.push(item)
+      }
+    })
+    recentGame.map((item,idx)=>{
+      if (item.gameId == arr[arr.length - 1].gameId) {
+        recentGame.splice(idx,1)
+        recentGame.unshift({...element,filterStatus: 1})
       }
     })
     localStorage.setItem('recentGame',JSON.stringify(recentGame))
