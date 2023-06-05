@@ -241,10 +241,13 @@ export default {
     backClick() {
       this.playValue = false
       clearInterval(this.timer)
+      clearInterval(this.timer2)
     },
     // 跳转详情
     detailsClick(item) {
       recentGame(item)
+      clearInterval(this.timer)
+      clearInterval(this.timer2)
       // this.$router.push({
       //   path: '/M/details',
       //   query: {

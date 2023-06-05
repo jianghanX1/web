@@ -54,7 +54,7 @@ import Navigation from '../components/Navigation';
 import BottomNav from '../components/BottomNav';
 import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
-import {determinePcOrMove, getGameList} from "@/utils/utils";
+import {determinePcOrMove, getGameList, recentGame} from "@/utils/utils";
 export default {
   name: "NotFound",
   components: {
@@ -96,6 +96,7 @@ export default {
     },
     // 点击跳转详情
     iconClick(item) {
+      recentGame(item)
       this.$router.push({
         path: '/P/details',
         query: {
