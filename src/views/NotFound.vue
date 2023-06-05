@@ -149,7 +149,7 @@ export default {
       width: 100%;
       margin-top: 18px;
       box-sizing: border-box;
-      overflow: hidden;
+      //overflow: hidden;
       @keyframes example {
         0%  {transform: scale(1);}
         35%  {transform: scale(1.2);}
