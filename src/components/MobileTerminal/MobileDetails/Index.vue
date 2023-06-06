@@ -68,7 +68,7 @@ import topping from '@/assets/topping.png';
 import ClassList from "@/components/MobileTerminal/MobileHome/ClassList";
 import StartAndEnd from "@/components/MobileTerminal/MobileHome/StartAndEnd";
 import {getGameInfo, getGameList, shuffle, determinePcOrMove, getGameType, setMeta, recentGame} from "@/utils/utils";
-import { show_newAfg_preroll } from '../../../../ah5sdk';
+import { show_newAfg_preroll } from '../../../../webh5sdk';
 export default {
   name: "mobileDetailsIndex",
   components: {
